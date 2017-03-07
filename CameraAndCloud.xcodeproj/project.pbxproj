@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0006DBC31E3FB54900B1A0F3 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0006DBC21E3FB54900B1A0F3 /* DAO.m */; };
+		001D20201E6A1A7300ABA460 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D201F1E6A1A7300ABA460 /* Comment.m */; };
+		001D20231E6B8DD300ABA460 /* CommentTableViewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D20221E6B8DD300ABA460 /* CommentTableViewTableViewController.m */; };
+		002105C01E56A6770018A3DC /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 002105BF1E56A6770018A3DC /* ImageInfo.m */; };
+		002255641E20779C0012D790 /* cameraIcon-thumbn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */; };
+		002255671E2078410012D790 /* galleryIcon-thumbn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255651E2078410012D790 /* galleryIcon-thumbn-off.png */; };
+		002255701E207D520012D790 /* takeAphotColordBkg375X300.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022556F1E207D520012D790 /* takeAphotColordBkg375X300.png */; };
+		002255721E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255711E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png */; };
+		002255751E2423E20012D790 /* GalleryCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 002255741E2423E20012D790 /* GalleryCVC.m */; };
+		005B2C371E36A66F006BAFB0 /* GalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B2C361E36A66F006BAFB0 /* GalleryCollectionViewController.m */; };
+		005B2C3A1E36A913006BAFB0 /* button-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C381E36A913006BAFB0 /* button-camera.png */; };
+		005B2C3B1E36A913006BAFB0 /* button-home.png in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C391E36A913006BAFB0 /* button-home.png */; };
+		005B2C3E1E36AB8F006BAFB0 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */; };
+		005B2C421E36C50C006BAFB0 /* photo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C3F1E36C50C006BAFB0 /* photo1.jpg */; };
+		005B2C431E36C50C006BAFB0 /* photo2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C401E36C50C006BAFB0 /* photo2.jpg */; };
+		005B2C441E36C50C006BAFB0 /* photo3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C411E36C50C006BAFB0 /* photo3.jpg */; };
+		0074FF391E34EFCA002D81CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0074FF381E34EFCA002D81CE /* LoginViewController.m */; };
+		007DCC881E386E800081CD0A /* button-logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 007DCC871E386E800081CD0A /* button-logout.png */; };
+		007DCC921E3870AC0081CD0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007DCC911E3870AC0081CD0A /* Main.storyboard */; };
+		007F25501E1EC7D3002C9361 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F254F1E1EC7D3002C9361 /* main.m */; };
+		007F25531E1EC7D3002C9361 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F25521E1EC7D3002C9361 /* AppDelegate.m */; };
+		007F25561E1EC7D4002C9361 /* TakeAPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F25551E1EC7D4002C9361 /* TakeAPhotoViewController.m */; };
+		007F255B1E1EC7D4002C9361 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 007F255A1E1EC7D4002C9361 /* Assets.xcassets */; };
+		007F255E1E1EC7D4002C9361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */; };
+		007F25681E1EC976002C9361 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007F25671E1EC976002C9361 /* GoogleService-Info.plist */; };
+		00942AD61E2803F800D3FA4E /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00942AD51E2803F800D3FA4E /* PhotoCollectionViewCell.m */; };
+		00ABC7C81E3AE02C001822FE /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */; };
+		00EBE3AD1E42AF7E00203079 /* button-heart-OFF.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AA1E42AF7E00203079 /* button-heart-OFF.jpg */; };
+		00EBE3AE1E42AF7E00203079 /* button-heart-ON.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */; };
+		00EBE3B11E42B19700203079 /* button-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AF1E42B19700203079 /* button-chat.png */; };
+		00EBE3B21E42B19700203079 /* button-moreBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3B01E42B19700203079 /* button-moreBW.png */; };
+		00FA3C141E648E1D000AD17D /* DeletePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FA3C121E648E1D000AD17D /* DeletePhotoViewController.m */; };
+		00FA3C151E648E1D000AD17D /* DeletePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00FA3C131E648E1D000AD17D /* DeletePhotoViewController.xib */; };
+		00FD319C1E26E55700F5523F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FD319B1E26E55700F5523F /* Photo.m */; };
+		3C6EEF636D6A1FD60278EAF2 /* libPods-CameraAndCloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA39DFAE1A553783B80860B6 /* libPods-CameraAndCloud.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0006DBC11E3FB54900B1A0F3 /* DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAO.h; sourceTree = "<group>"; };
+		0006DBC21E3FB54900B1A0F3 /* DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAO.m; sourceTree = "<group>"; };
+		001D201E1E6A1A7300ABA460 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		001D201F1E6A1A7300ABA460 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		001D20211E6B8DD300ABA460 /* CommentTableViewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewTableViewController.h; sourceTree = "<group>"; };
+		001D20221E6B8DD300ABA460 /* CommentTableViewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewTableViewController.m; sourceTree = "<group>"; };
+		002105BE1E56A6770018A3DC /* ImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfo.h; sourceTree = "<group>"; };
+		002105BF1E56A6770018A3DC /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
+		002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraIcon-thumbn-off.png"; sourceTree = "<group>"; };
+		002255651E2078410012D790 /* galleryIcon-thumbn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryIcon-thumbn-off.png"; sourceTree = "<group>"; };
+		0022556F1E207D520012D790 /* takeAphotColordBkg375X300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takeAphotColordBkg375X300.png; sourceTree = "<group>"; };
+		002255711E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadPhotoFromGalleryColordBkg375X300.png; sourceTree = "<group>"; };
+		002255731E2423E20012D790 /* GalleryCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCVC.h; sourceTree = "<group>"; };
+		002255741E2423E20012D790 /* GalleryCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryCVC.m; sourceTree = "<group>"; };
+		005B2C331E35C169006BAFB0 /* CameraAndCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CameraAndCloud.entitlements; sourceTree = "<group>"; };
+		005B2C351E36A66F006BAFB0 /* GalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCollectionViewController.h; sourceTree = "<group>"; };
+		005B2C361E36A66F006BAFB0 /* GalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryCollectionViewController.m; sourceTree = "<group>"; };
+		005B2C381E36A913006BAFB0 /* button-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-camera.png"; sourceTree = "<group>"; };
+		005B2C391E36A913006BAFB0 /* button-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-home.png"; sourceTree = "<group>"; };
+		005B2C3C1E36AB8F006BAFB0 /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoViewController.h; sourceTree = "<group>"; };
+		005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
+		005B2C3F1E36C50C006BAFB0 /* photo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo1.jpg; sourceTree = "<group>"; };
+		005B2C401E36C50C006BAFB0 /* photo2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo2.jpg; sourceTree = "<group>"; };
+		005B2C411E36C50C006BAFB0 /* photo3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo3.jpg; sourceTree = "<group>"; };
+		0074FF371E34EFCA002D81CE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		0074FF381E34EFCA002D81CE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		007DCC871E386E800081CD0A /* button-logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-logout.png"; sourceTree = "<group>"; };
+		007DCC911E3870AC0081CD0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		007F254B1E1EC7D3002C9361 /* CameraAndCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraAndCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		007F254F1E1EC7D3002C9361 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		007F25511E1EC7D3002C9361 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		007F25521E1EC7D3002C9361 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		007F25541E1EC7D3002C9361 /* TakeAPhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeAPhotoViewController.h; sourceTree = "<group>"; };
+		007F25551E1EC7D4002C9361 /* TakeAPhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeAPhotoViewController.m; sourceTree = "<group>"; };
+		007F255A1E1EC7D4002C9361 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		007F255D1E1EC7D4002C9361 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		007F255F1E1EC7D4002C9361 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		007F25671E1EC976002C9361 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		00942AD41E2803F800D3FA4E /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		00942AD51E2803F800D3FA4E /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		00ABC7C61E3AE02C001822FE /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
+		00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
+		00EBE3AA1E42AF7E00203079 /* button-heart-OFF.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-OFF.jpg"; sourceTree = "<group>"; };
+		00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-ON.jpg"; sourceTree = "<group>"; };
+		00EBE3AF1E42B19700203079 /* button-chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-chat.png"; sourceTree = "<group>"; };
+		00EBE3B01E42B19700203079 /* button-moreBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-moreBW.png"; sourceTree = "<group>"; };
+		00FA3C111E648E1D000AD17D /* DeletePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletePhotoViewController.h; sourceTree = "<group>"; };
+		00FA3C121E648E1D000AD17D /* DeletePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletePhotoViewController.m; sourceTree = "<group>"; };
+		00FA3C131E648E1D000AD17D /* DeletePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeletePhotoViewController.xib; sourceTree = "<group>"; };
+		00FD319A1E26E55700F5523F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		00FD319B1E26E55700F5523F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		56B57B9702A2F1679394577D /* Pods-CameraAndCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraAndCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CameraAndCloud/Pods-CameraAndCloud.debug.xcconfig"; sourceTree = "<group>"; };
+		61D0599A52FE7F1E0EAE5418 /* Pods-CameraAndCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraAndCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-CameraAndCloud/Pods-CameraAndCloud.release.xcconfig"; sourceTree = "<group>"; };
+		CA39DFAE1A553783B80860B6 /* libPods-CameraAndCloud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CameraAndCloud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		007F25481E1EC7D3002C9361 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C6EEF636D6A1FD60278EAF2 /* libPods-CameraAndCloud.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0006DBC41E3FB55800B1A0F3 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				0006DBC11E3FB54900B1A0F3 /* DAO.h */,
+				0006DBC21E3FB54900B1A0F3 /* DAO.m */,
+			);
+			name = DAO;
+			sourceTree = "<group>";
+		};
+		001D351B1E202F2100CAB4B1 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				00EBE3AF1E42B19700203079 /* button-chat.png */,
+				00EBE3B01E42B19700203079 /* button-moreBW.png */,
+				00EBE3AA1E42AF7E00203079 /* button-heart-OFF.jpg */,
+				00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */,
+				007DCC871E386E800081CD0A /* button-logout.png */,
+				005B2C381E36A913006BAFB0 /* button-camera.png */,
+				005B2C391E36A913006BAFB0 /* button-home.png */,
+				002255651E2078410012D790 /* galleryIcon-thumbn-off.png */,
+				002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */,
+				0022556F1E207D520012D790 /* takeAphotColordBkg375X300.png */,
+				002255711E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png */,
+				005B2C3F1E36C50C006BAFB0 /* photo1.jpg */,
+				005B2C401E36C50C006BAFB0 /* photo2.jpg */,
+				005B2C411E36C50C006BAFB0 /* photo3.jpg */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		005B2C341E36A3DA006BAFB0 /* old VCs */ = {
+			isa = PBXGroup;
+			children = (
+				007F25541E1EC7D3002C9361 /* TakeAPhotoViewController.h */,
+				007F25551E1EC7D4002C9361 /* TakeAPhotoViewController.m */,
+				002255731E2423E20012D790 /* GalleryCVC.h */,
+				002255741E2423E20012D790 /* GalleryCVC.m */,
+			);
+			name = "old VCs";
+			sourceTree = "<group>";
+		};
+		0074FF3A1E34EFF3002D81CE /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				0074FF371E34EFCA002D81CE /* LoginViewController.h */,
+				0074FF381E34EFCA002D81CE /* LoginViewController.m */,
+				005B2C351E36A66F006BAFB0 /* GalleryCollectionViewController.h */,
+				005B2C361E36A66F006BAFB0 /* GalleryCollectionViewController.m */,
+				005B2C3C1E36AB8F006BAFB0 /* TakePhotoViewController.h */,
+				005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */,
+				00ABC7C61E3AE02C001822FE /* PhotoDetailViewController.h */,
+				00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */,
+				001D20211E6B8DD300ABA460 /* CommentTableViewTableViewController.h */,
+				001D20221E6B8DD300ABA460 /* CommentTableViewTableViewController.m */,
+				00FA3C161E648E24000AD17D /* DeletePhotoViewController */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		007F25421E1EC7D3002C9361 = {
+			isa = PBXGroup;
+			children = (
+				007F254D1E1EC7D3002C9361 /* CameraAndCloud */,
+				007F254C1E1EC7D3002C9361 /* Products */,
+				258FA753FC93DD25D026973E /* Pods */,
+				2199E6AD747D398375CCCC25 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		007F254C1E1EC7D3002C9361 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				007F254B1E1EC7D3002C9361 /* CameraAndCloud.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		007F254D1E1EC7D3002C9361 /* CameraAndCloud */ = {
+			isa = PBXGroup;
+			children = (
+				005B2C331E35C169006BAFB0 /* CameraAndCloud.entitlements */,
+				007F25511E1EC7D3002C9361 /* AppDelegate.h */,
+				007F25521E1EC7D3002C9361 /* AppDelegate.m */,
+				00942AD81E28041C00D3FA4E /* PhotoCollectionViewCell */,
+				00942AD71E28040F00D3FA4E /* DataModel */,
+				007DCC911E3870AC0081CD0A /* Main.storyboard */,
+				0006DBC41E3FB55800B1A0F3 /* DAO */,
+				0074FF3A1E34EFF3002D81CE /* VC */,
+				007F255A1E1EC7D4002C9361 /* Assets.xcassets */,
+				005B2C341E36A3DA006BAFB0 /* old VCs */,
+				007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */,
+				007F255F1E1EC7D4002C9361 /* Info.plist */,
+				007F25671E1EC976002C9361 /* GoogleService-Info.plist */,
+				001D351B1E202F2100CAB4B1 /* images */,
+				007F254E1E1EC7D3002C9361 /* Supporting Files */,
+			);
+			path = CameraAndCloud;
+			sourceTree = "<group>";
+		};
+		007F254E1E1EC7D3002C9361 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				007F254F1E1EC7D3002C9361 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00942AD71E28040F00D3FA4E /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				002105BE1E56A6770018A3DC /* ImageInfo.h */,
+				002105BF1E56A6770018A3DC /* ImageInfo.m */,
+				00FD319A1E26E55700F5523F /* Photo.h */,
+				00FD319B1E26E55700F5523F /* Photo.m */,
+				001D201E1E6A1A7300ABA460 /* Comment.h */,
+				001D201F1E6A1A7300ABA460 /* Comment.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		00942AD81E28041C00D3FA4E /* PhotoCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				00942AD41E2803F800D3FA4E /* PhotoCollectionViewCell.h */,
+				00942AD51E2803F800D3FA4E /* PhotoCollectionViewCell.m */,
+			);
+			name = PhotoCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		00FA3C161E648E24000AD17D /* DeletePhotoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				00FA3C111E648E1D000AD17D /* DeletePhotoViewController.h */,
+				00FA3C121E648E1D000AD17D /* DeletePhotoViewController.m */,
+				00FA3C131E648E1D000AD17D /* DeletePhotoViewController.xib */,
+			);
+			name = DeletePhotoViewController;
+			sourceTree = "<group>";
+		};
+		2199E6AD747D398375CCCC25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA39DFAE1A553783B80860B6 /* libPods-CameraAndCloud.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		258FA753FC93DD25D026973E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				56B57B9702A2F1679394577D /* Pods-CameraAndCloud.debug.xcconfig */,
+				61D0599A52FE7F1E0EAE5418 /* Pods-CameraAndCloud.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		007F254A1E1EC7D3002C9361 /* CameraAndCloud */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 007F25621E1EC7D4002C9361 /* Build configuration list for PBXNativeTarget "CameraAndCloud" */;
+			buildPhases = (
+				D7CAFF6E214FCE87FCF93F70 /* [CP] Check Pods Manifest.lock */,
+				007F25471E1EC7D3002C9361 /* Sources */,
+				007F25481E1EC7D3002C9361 /* Frameworks */,
+				007F25491E1EC7D3002C9361 /* Resources */,
+				02235C5BD558D4895621AB36 /* [CP] Embed Pods Frameworks */,
+				817F4D82EAD1121B2CA0A833 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CameraAndCloud;
+			productName = CameraAndCloud;
+			productReference = 007F254B1E1EC7D3002C9361 /* CameraAndCloud.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		007F25431E1EC7D3002C9361 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Emiko Clark";
+				TargetAttributes = {
+					007F254A1E1EC7D3002C9361 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = X9KW2SQ39Q;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 007F25461E1EC7D3002C9361 /* Build configuration list for PBXProject "CameraAndCloud" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 007F25421E1EC7D3002C9361;
+			productRefGroup = 007F254C1E1EC7D3002C9361 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				007F254A1E1EC7D3002C9361 /* CameraAndCloud */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		007F25491E1EC7D3002C9361 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007F255E1E1EC7D4002C9361 /* LaunchScreen.storyboard in Resources */,
+				007F25681E1EC976002C9361 /* GoogleService-Info.plist in Resources */,
+				007F255B1E1EC7D4002C9361 /* Assets.xcassets in Resources */,
+				007DCC881E386E800081CD0A /* button-logout.png in Resources */,
+				002255641E20779C0012D790 /* cameraIcon-thumbn-off.png in Resources */,
+				005B2C3B1E36A913006BAFB0 /* button-home.png in Resources */,
+				00EBE3B21E42B19700203079 /* button-moreBW.png in Resources */,
+				002255721E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png in Resources */,
+				00EBE3AD1E42AF7E00203079 /* button-heart-OFF.jpg in Resources */,
+				007DCC921E3870AC0081CD0A /* Main.storyboard in Resources */,
+				005B2C3A1E36A913006BAFB0 /* button-camera.png in Resources */,
+				00EBE3AE1E42AF7E00203079 /* button-heart-ON.jpg in Resources */,
+				005B2C421E36C50C006BAFB0 /* photo1.jpg in Resources */,
+				002255671E2078410012D790 /* galleryIcon-thumbn-off.png in Resources */,
+				00EBE3B11E42B19700203079 /* button-chat.png in Resources */,
+				002255701E207D520012D790 /* takeAphotColordBkg375X300.png in Resources */,
+				00FA3C151E648E1D000AD17D /* DeletePhotoViewController.xib in Resources */,
+				005B2C441E36C50C006BAFB0 /* photo3.jpg in Resources */,
+				005B2C431E36C50C006BAFB0 /* photo2.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02235C5BD558D4895621AB36 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CameraAndCloud/Pods-CameraAndCloud-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		817F4D82EAD1121B2CA0A833 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CameraAndCloud/Pods-CameraAndCloud-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7CAFF6E214FCE87FCF93F70 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		007F25471E1EC7D3002C9361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0006DBC31E3FB54900B1A0F3 /* DAO.m in Sources */,
+				00FD319C1E26E55700F5523F /* Photo.m in Sources */,
+				00942AD61E2803F800D3FA4E /* PhotoCollectionViewCell.m in Sources */,
+				007F25561E1EC7D4002C9361 /* TakeAPhotoViewController.m in Sources */,
+				001D20231E6B8DD300ABA460 /* CommentTableViewTableViewController.m in Sources */,
+				00FA3C141E648E1D000AD17D /* DeletePhotoViewController.m in Sources */,
+				007F25531E1EC7D3002C9361 /* AppDelegate.m in Sources */,
+				002105C01E56A6770018A3DC /* ImageInfo.m in Sources */,
+				001D20201E6A1A7300ABA460 /* Comment.m in Sources */,
+				0074FF391E34EFCA002D81CE /* LoginViewController.m in Sources */,
+				005B2C371E36A66F006BAFB0 /* GalleryCollectionViewController.m in Sources */,
+				007F25501E1EC7D3002C9361 /* main.m in Sources */,
+				005B2C3E1E36AB8F006BAFB0 /* TakePhotoViewController.m in Sources */,
+				00ABC7C81E3AE02C001822FE /* PhotoDetailViewController.m in Sources */,
+				002255751E2423E20012D790 /* GalleryCVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				007F255D1E1EC7D4002C9361 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		007F25601E1EC7D4002C9361 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		007F25611E1EC7D4002C9361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		007F25631E1EC7D4002C9361 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56B57B9702A2F1679394577D /* Pods-CameraAndCloud.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CameraAndCloud/CameraAndCloud.entitlements;
+				DEVELOPMENT_TEAM = X9KW2SQ39Q;
+				INFOPLIST_FILE = CameraAndCloud/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emikoclark.CameraAndCloud;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		007F25641E1EC7D4002C9361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61D0599A52FE7F1E0EAE5418 /* Pods-CameraAndCloud.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CameraAndCloud/CameraAndCloud.entitlements;
+				DEVELOPMENT_TEAM = X9KW2SQ39Q;
+				INFOPLIST_FILE = CameraAndCloud/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emikoclark.CameraAndCloud;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		007F25461E1EC7D3002C9361 /* Build configuration list for PBXProject "CameraAndCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				007F25601E1EC7D4002C9361 /* Debug */,
+				007F25611E1EC7D4002C9361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		007F25621E1EC7D4002C9361 /* Build configuration list for PBXNativeTarget "CameraAndCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				007F25631E1EC7D4002C9361 /* Debug */,
+				007F25641E1EC7D4002C9361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 007F25431E1EC7D3002C9361 /* Project object */;
+}
