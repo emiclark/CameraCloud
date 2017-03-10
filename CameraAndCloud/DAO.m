@@ -12,6 +12,7 @@
 #define  BASE_STORAGE_URL @"gs://cameraandcloud-935e4.appspot.com"
 #define  BASE_DATABASE_URL @"https://cameraandcloud-935e4.firebaseio.com"
 
+
 @implementation DAO
 
 static DAO *sharedInstance = nil;
@@ -85,7 +86,6 @@ int picCount;
         [NSNotification notificationWithName:@"Update" object:nil userInfo:nil];
         
     }
-    
     // download cloud Data for photos
     [self downloadCloudDataForPhotos: fileList];
     
@@ -131,6 +131,7 @@ int picCount;
                 // add to imagesArray
                 [self.imagesArray addObject:info];
                 
+                NSLog(@"info:%@",info);
                 [DAO printImagesArray: self.imagesArray];
                 
                 // download photos from firebase and save to DocDir
@@ -173,6 +174,8 @@ int picCount;
                             info.imageDDPath = [NSString stringWithFormat: @"%@/%@.jpg",self.DDpath,info.filename];
                             [self.imagesArray addObject: info];
                             [self downloadPhotoWithFilename: info];
+
+                            fileFound = YES;
                         }
                         else {
                             // check photo in Firebase against fileList
@@ -228,7 +231,7 @@ int picCount;
     for (NSString *key in responseData) {
         ImageInfo *info = [[ImageInfo alloc] init];
         info.filename = [[responseData objectForKey: key] objectForKey:@"filename"];
-        info.username  = [[responseData objectForKey:key] objectForKey:@"username"];
+        info.username  = [[responseData objectForKey:key] objectForKey:@"user"];
         info.downloadURL  = [[responseData objectForKey:key] objectForKey:@"downloadURL"];
         info.imageDDPath = [NSString stringWithFormat:@"%@/%@.jpg",self.DDpath, info.filename];
         [self updateImagesArrayWithInfo: info];
@@ -286,8 +289,12 @@ int picCount;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+
     NSString *userData = [NSString stringWithFormat:@"%@/users/%@/%@.json", BASE_DATABASE_URL, info.username, info.filename];
+    
+// >> FIX ERROR: >>  https://cameraandcloud-935e4.firebaseio.com/users/(null)/030817114619.json
+    
+    
     [manager GET:userData parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         // get user information for specific photo
@@ -305,37 +312,48 @@ int picCount;
             
             // populate comments array
             self.photoDataForUser.commentsArr = [[NSMutableArray alloc]init];
-            
+
             NSArray *tempCommentsArr = [responseObject objectForKey:@"comments"];
-                for (NSDictionary *photo in tempCommentsArr){
-                    
+            
+            if([tempCommentsArr  isEqual: @""])
+            {
+                // no comments for photo
+                NSLog(@"Nothing in Comments array");
+            }
+            else
+            {
+                // comments exists, add them to array
+                for (NSDictionary *photo in tempCommentsArr)
+                {
                     Comment *comment = [[Comment alloc] initWithUsername:[photo objectForKey:@"username"] andText:[photo  objectForKey:@"text"]];
-                    
-                    NSLog(@"This comment: %@", comment.text);
-                    NSLog(@"from user: %@", comment.username);
                     [self.commentArray addObject:comment];
                 }
-
-            
-//            for (NSDictionary *photo in tempCommentsArr) {
-//                for (NSString *key in photo){
-//                    NSDictionary *actualComment = [photo objectForKey:key];
-//                    Comment *comment = [[Comment alloc] initWithUsername:[actualComment objectForKey:@"username"] andText:[actualComment objectForKey:@"text"]];
-//                    NSLog(@"This comment: %@", comment.text);
-//                    NSLog(@"from user: %@", comment.username);
-//                    [self.commentArray addObject:comment];
-//                    
-//                }
-//            }
+            }
             self.photoDataForUser.commentsArr = self.commentArray;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"Segue" object:self userInfo:nil];
         });
     }
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             NSLog(@"ERROR: downloading User data for photo.");
+             NSLog(@"ERROR: downloading User data for photo:%@-",error);
          }];
 
+}
+
+-(UIImage *)resizeImage:(UIImage *)image
+{
+    float i_width = image.size.width/4;
+    float oldWidth = image.size.width;
+    float scaleFactor = i_width / oldWidth;
+    
+    float newHeight = image.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 #pragma mark Write To Firebase Methods
@@ -343,7 +361,7 @@ int picCount;
 - (ImageInfo*) uploadImageToFirebase:(UIImage *)selectedImage withImageInfo: (ImageInfo*)info;
 {
     // upload image to Firebase Storage
-    NSData *data = UIImageJPEGRepresentation(selectedImage, 1.0);
+    NSData *data = UIImageJPEGRepresentation(selectedImage, 0.1);
     
     self.imageRef = [self.storageRef child: [NSString stringWithFormat:@"images/%@.jpg",info.filename]];
     NSLog(@"uploadimage>>: %@\n",self.imageRef);
@@ -401,27 +419,27 @@ int picCount;
     NSString *key = [info.filename stringByDeletingPathExtension];
     NSString *lookupID = [NSString stringWithFormat:@"%@/lookup/files/%@.json", BASE_DATABASE_URL, key];
     
-    NSDictionary *sendInfo = @{@"filename":info.filename, @"user":info.username, @"downloadURL":info.downloadURL};
+    NSDictionary *sendInfo = @{@"DDpath": self.DDpath, @"filename":info.filename, @"username":info.username, @"downloadURL":info.downloadURL};
     
     [manager PATCH: lookupID parameters: sendInfo success: ^(NSURLSessionDataTask *task, id responseObject)
      {
-     // success writing to baseURL/files/filename
-     NSLog(@"success lookupID PUT responseObject: %@", responseObject);
-     
-     // write user uuid info to database
-     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
-     NSString *uuidString = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
-     
-     // get uid from nsuserdefaults
-     NSString *uidPath = [NSString stringWithFormat:@"%@/lookup/users/%@.json", BASE_DATABASE_URL,uuidString];
-     
-     // create dictionary
-     NSDictionary *uidDict = [[NSDictionary alloc] initWithObjectsAndKeys:username, uuidString, nil];
+         // success writing to baseURL/files/filename
+         NSLog(@"success lookupID PUT responseObject: %@", responseObject);
+         
+         // write user uuid info to database
+         NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+         NSString *uuidString = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+         
+         // get uid from nsuserdefaults
+         NSString *uidPath = [NSString stringWithFormat:@"%@/lookup/users/%@.json", BASE_DATABASE_URL,uuidString];
+         
+         // create dictionary
+         NSDictionary *uidDict = [[NSDictionary alloc] initWithObjectsAndKeys:username, uuidString, nil];
      
      // write uid and user info to /lookup/uid/
      [manager PUT: uidPath parameters: uidDict success: ^(NSURLSessionDataTask *task, id responseObject)
       {
-      NSLog(@"success UUID PUT responseObject: %@", responseObject);
+          NSLog(@"success UUID PUT responseObject: %@", responseObject);
       }
           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
       {
@@ -444,14 +462,14 @@ int picCount;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
-    NSString *user = [[NSUserDefaults standardUserDefaults] stringForKey:@"user"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *email = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
     
     // create dictionary
-    NSDictionary *post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", email, @"email", info.filename, @"filename", @0, @"likes", @"", @"comments", user, @"username", nil];
+    NSDictionary *post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", email, @"email", info.filename, @"filename", @0, @"likes", @"", @"comments", username, @"username", nil];
     
     // write NSDictionary photo object to Firebase Database using AFNetworking
-    NSString *userInfoString = [NSString stringWithFormat: @"%@/users/%@/%@.json",BASE_DATABASE_URL, user, self.fileDate];
+    NSString *userInfoString = [NSString stringWithFormat: @"%@/users/%@/%@.json",BASE_DATABASE_URL, username, self.fileDate];
     
     [manager PUT:userInfoString parameters: post  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
@@ -578,7 +596,7 @@ int picCount;
 + (void) printImagesArray: (NSMutableArray *)array
 {
     for(id item in array) {
-        NSLog(@"array: %@\n",item);
+        NSLog(@"\n\nimagesArray: %@\n\n",item);
     }
 }
 
@@ -593,6 +611,7 @@ int picCount;
         }
     }
     NSLog(@"updated info:%@",info);
+    [DAO printImagesArray: self.imagesArray];
 }
 
 @end

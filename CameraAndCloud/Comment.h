@@ -12,5 +12,5 @@
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *text;
 
-- (instancetype)initWithUsername: (NSString*) user andText: (NSString*) text;
+- (instancetype)initWithUsername: (NSString*) username andText: (NSString*) text;
 @end

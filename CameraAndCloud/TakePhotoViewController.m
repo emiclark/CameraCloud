@@ -27,6 +27,8 @@ NSString *username;
 
 #pragma mark Button Tapped Methods
 
+
+//
 - (IBAction)takePhotoButtonTapped:(UIButton *)sender
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -66,10 +68,13 @@ NSString *username;
 }
 
 
+// gallery
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     self.selectedImage = info[UIImagePickerControllerOriginalImage];
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // resize image before uploading to Firebase
+    self.selectedImage = [[DAO sharedInstance] resizeImage:self.selectedImage];
 
     // prepare to upload image to Firebase storage
     
@@ -77,7 +82,7 @@ NSString *username;
     ImageInfo *imgInfo =  [[ImageInfo alloc]init];
     imgInfo.filename = [self.dao createFilename];
     imgInfo.imageDDPath = [NSString stringWithFormat:@"%@/%@.jpg", self.dao.DDpath, imgInfo.filename];
-    imgInfo.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    imgInfo.username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     imgInfo.downloadURL = @"";
     
     // save image to DDirectory
@@ -93,6 +98,11 @@ NSString *username;
 
     // notify update to refresh collection view
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object:self userInfo:nil];
+    
+    //dismiss imagepicker
+    [self dismissViewControllerAnimated:picker completion:nil];
+    
+    
 }
 
 #pragma mark Alert and Notification Methods

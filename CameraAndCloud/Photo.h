@@ -16,11 +16,10 @@
 @property (nonatomic, strong) NSString *userEmail;
 @property (nonatomic, strong) NSString *filename;
 @property (nonatomic, strong) NSString *DDfilePath;
-@property (nonatomic, strong) NSString *commentDate;
 @property (nonatomic, strong) NSMutableArray <Comment*> *commentsArr;
 @property (nonatomic, strong) NSString *username;
 @property NSNumber * likes;
 
-- (Photo *) initWithEmail: (NSString *)userEmail andFilename:(NSString *)filename andDownloadURL:(NSURL *)fileDownloadURL    Username:(NSString *)username likes:(NSNumber *)likes andComments:(NSArray*) comments;
+- (Photo *) initWithEmail: (NSString *)userEmail andFilename:(NSString *)filename andDownloadURL:(NSURL *)fileDownloadURL    Username:(NSString *)username likes:(NSNumber *)likes andComments:(NSMutableArray*) comments;
 
 @end

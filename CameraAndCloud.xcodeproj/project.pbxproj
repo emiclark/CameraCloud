@@ -8,27 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		0006DBC31E3FB54900B1A0F3 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0006DBC21E3FB54900B1A0F3 /* DAO.m */; };
+		00173C731E7335DB005ADFC5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00173C721E7335DB005ADFC5 /* AVFoundation.framework */; };
 		001D20201E6A1A7300ABA460 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D201F1E6A1A7300ABA460 /* Comment.m */; };
-		001D20231E6B8DD300ABA460 /* CommentTableViewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D20221E6B8DD300ABA460 /* CommentTableViewTableViewController.m */; };
 		002105C01E56A6770018A3DC /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 002105BF1E56A6770018A3DC /* ImageInfo.m */; };
 		002255641E20779C0012D790 /* cameraIcon-thumbn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */; };
 		002255671E2078410012D790 /* galleryIcon-thumbn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255651E2078410012D790 /* galleryIcon-thumbn-off.png */; };
 		002255701E207D520012D790 /* takeAphotColordBkg375X300.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022556F1E207D520012D790 /* takeAphotColordBkg375X300.png */; };
 		002255721E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255711E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png */; };
-		002255751E2423E20012D790 /* GalleryCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 002255741E2423E20012D790 /* GalleryCVC.m */; };
 		005B2C371E36A66F006BAFB0 /* GalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B2C361E36A66F006BAFB0 /* GalleryCollectionViewController.m */; };
 		005B2C3A1E36A913006BAFB0 /* button-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C381E36A913006BAFB0 /* button-camera.png */; };
 		005B2C3B1E36A913006BAFB0 /* button-home.png in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C391E36A913006BAFB0 /* button-home.png */; };
 		005B2C3E1E36AB8F006BAFB0 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */; };
-		005B2C421E36C50C006BAFB0 /* photo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C3F1E36C50C006BAFB0 /* photo1.jpg */; };
-		005B2C431E36C50C006BAFB0 /* photo2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C401E36C50C006BAFB0 /* photo2.jpg */; };
-		005B2C441E36C50C006BAFB0 /* photo3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C411E36C50C006BAFB0 /* photo3.jpg */; };
 		0074FF391E34EFCA002D81CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0074FF381E34EFCA002D81CE /* LoginViewController.m */; };
 		007DCC881E386E800081CD0A /* button-logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 007DCC871E386E800081CD0A /* button-logout.png */; };
 		007DCC921E3870AC0081CD0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007DCC911E3870AC0081CD0A /* Main.storyboard */; };
 		007F25501E1EC7D3002C9361 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F254F1E1EC7D3002C9361 /* main.m */; };
 		007F25531E1EC7D3002C9361 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F25521E1EC7D3002C9361 /* AppDelegate.m */; };
-		007F25561E1EC7D4002C9361 /* TakeAPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F25551E1EC7D4002C9361 /* TakeAPhotoViewController.m */; };
 		007F255B1E1EC7D4002C9361 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 007F255A1E1EC7D4002C9361 /* Assets.xcassets */; };
 		007F255E1E1EC7D4002C9361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */; };
 		007F25681E1EC976002C9361 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007F25671E1EC976002C9361 /* GoogleService-Info.plist */; };
@@ -38,8 +33,6 @@
 		00EBE3AE1E42AF7E00203079 /* button-heart-ON.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */; };
 		00EBE3B11E42B19700203079 /* button-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AF1E42B19700203079 /* button-chat.png */; };
 		00EBE3B21E42B19700203079 /* button-moreBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3B01E42B19700203079 /* button-moreBW.png */; };
-		00FA3C141E648E1D000AD17D /* DeletePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FA3C121E648E1D000AD17D /* DeletePhotoViewController.m */; };
-		00FA3C151E648E1D000AD17D /* DeletePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00FA3C131E648E1D000AD17D /* DeletePhotoViewController.xib */; };
 		00FD319C1E26E55700F5523F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FD319B1E26E55700F5523F /* Photo.m */; };
 		3C6EEF636D6A1FD60278EAF2 /* libPods-CameraAndCloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA39DFAE1A553783B80860B6 /* libPods-CameraAndCloud.a */; };
 /* End PBXBuildFile section */
@@ -47,18 +40,15 @@
 /* Begin PBXFileReference section */
 		0006DBC11E3FB54900B1A0F3 /* DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAO.h; sourceTree = "<group>"; };
 		0006DBC21E3FB54900B1A0F3 /* DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAO.m; sourceTree = "<group>"; };
+		00173C721E7335DB005ADFC5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		001D201E1E6A1A7300ABA460 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		001D201F1E6A1A7300ABA460 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		001D20211E6B8DD300ABA460 /* CommentTableViewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewTableViewController.h; sourceTree = "<group>"; };
-		001D20221E6B8DD300ABA460 /* CommentTableViewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewTableViewController.m; sourceTree = "<group>"; };
 		002105BE1E56A6770018A3DC /* ImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfo.h; sourceTree = "<group>"; };
 		002105BF1E56A6770018A3DC /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
 		002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraIcon-thumbn-off.png"; sourceTree = "<group>"; };
 		002255651E2078410012D790 /* galleryIcon-thumbn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryIcon-thumbn-off.png"; sourceTree = "<group>"; };
 		0022556F1E207D520012D790 /* takeAphotColordBkg375X300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takeAphotColordBkg375X300.png; sourceTree = "<group>"; };
 		002255711E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadPhotoFromGalleryColordBkg375X300.png; sourceTree = "<group>"; };
-		002255731E2423E20012D790 /* GalleryCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCVC.h; sourceTree = "<group>"; };
-		002255741E2423E20012D790 /* GalleryCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryCVC.m; sourceTree = "<group>"; };
 		005B2C331E35C169006BAFB0 /* CameraAndCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CameraAndCloud.entitlements; sourceTree = "<group>"; };
 		005B2C351E36A66F006BAFB0 /* GalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCollectionViewController.h; sourceTree = "<group>"; };
 		005B2C361E36A66F006BAFB0 /* GalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryCollectionViewController.m; sourceTree = "<group>"; };
@@ -66,9 +56,6 @@
 		005B2C391E36A913006BAFB0 /* button-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-home.png"; sourceTree = "<group>"; };
 		005B2C3C1E36AB8F006BAFB0 /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoViewController.h; sourceTree = "<group>"; };
 		005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
-		005B2C3F1E36C50C006BAFB0 /* photo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo1.jpg; sourceTree = "<group>"; };
-		005B2C401E36C50C006BAFB0 /* photo2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo2.jpg; sourceTree = "<group>"; };
-		005B2C411E36C50C006BAFB0 /* photo3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo3.jpg; sourceTree = "<group>"; };
 		0074FF371E34EFCA002D81CE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0074FF381E34EFCA002D81CE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		007DCC871E386E800081CD0A /* button-logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-logout.png"; sourceTree = "<group>"; };
@@ -77,8 +64,6 @@
 		007F254F1E1EC7D3002C9361 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		007F25511E1EC7D3002C9361 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		007F25521E1EC7D3002C9361 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		007F25541E1EC7D3002C9361 /* TakeAPhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeAPhotoViewController.h; sourceTree = "<group>"; };
-		007F25551E1EC7D4002C9361 /* TakeAPhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeAPhotoViewController.m; sourceTree = "<group>"; };
 		007F255A1E1EC7D4002C9361 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		007F255D1E1EC7D4002C9361 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		007F255F1E1EC7D4002C9361 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,9 +76,6 @@
 		00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-ON.jpg"; sourceTree = "<group>"; };
 		00EBE3AF1E42B19700203079 /* button-chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-chat.png"; sourceTree = "<group>"; };
 		00EBE3B01E42B19700203079 /* button-moreBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-moreBW.png"; sourceTree = "<group>"; };
-		00FA3C111E648E1D000AD17D /* DeletePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletePhotoViewController.h; sourceTree = "<group>"; };
-		00FA3C121E648E1D000AD17D /* DeletePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletePhotoViewController.m; sourceTree = "<group>"; };
-		00FA3C131E648E1D000AD17D /* DeletePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeletePhotoViewController.xib; sourceTree = "<group>"; };
 		00FD319A1E26E55700F5523F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		00FD319B1E26E55700F5523F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		56B57B9702A2F1679394577D /* Pods-CameraAndCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraAndCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CameraAndCloud/Pods-CameraAndCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00173C731E7335DB005ADFC5 /* AVFoundation.framework in Frameworks */,
 				3C6EEF636D6A1FD60278EAF2 /* libPods-CameraAndCloud.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,22 +119,8 @@
 				002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */,
 				0022556F1E207D520012D790 /* takeAphotColordBkg375X300.png */,
 				002255711E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png */,
-				005B2C3F1E36C50C006BAFB0 /* photo1.jpg */,
-				005B2C401E36C50C006BAFB0 /* photo2.jpg */,
-				005B2C411E36C50C006BAFB0 /* photo3.jpg */,
 			);
 			name = images;
-			sourceTree = "<group>";
-		};
-		005B2C341E36A3DA006BAFB0 /* old VCs */ = {
-			isa = PBXGroup;
-			children = (
-				007F25541E1EC7D3002C9361 /* TakeAPhotoViewController.h */,
-				007F25551E1EC7D4002C9361 /* TakeAPhotoViewController.m */,
-				002255731E2423E20012D790 /* GalleryCVC.h */,
-				002255741E2423E20012D790 /* GalleryCVC.m */,
-			);
-			name = "old VCs";
 			sourceTree = "<group>";
 		};
 		0074FF3A1E34EFF3002D81CE /* VC */ = {
@@ -165,9 +134,6 @@
 				005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */,
 				00ABC7C61E3AE02C001822FE /* PhotoDetailViewController.h */,
 				00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */,
-				001D20211E6B8DD300ABA460 /* CommentTableViewTableViewController.h */,
-				001D20221E6B8DD300ABA460 /* CommentTableViewTableViewController.m */,
-				00FA3C161E648E24000AD17D /* DeletePhotoViewController */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -202,7 +168,6 @@
 				0006DBC41E3FB55800B1A0F3 /* DAO */,
 				0074FF3A1E34EFF3002D81CE /* VC */,
 				007F255A1E1EC7D4002C9361 /* Assets.xcassets */,
-				005B2C341E36A3DA006BAFB0 /* old VCs */,
 				007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */,
 				007F255F1E1EC7D4002C9361 /* Info.plist */,
 				007F25671E1EC976002C9361 /* GoogleService-Info.plist */,
@@ -242,19 +207,10 @@
 			name = PhotoCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		00FA3C161E648E24000AD17D /* DeletePhotoViewController */ = {
-			isa = PBXGroup;
-			children = (
-				00FA3C111E648E1D000AD17D /* DeletePhotoViewController.h */,
-				00FA3C121E648E1D000AD17D /* DeletePhotoViewController.m */,
-				00FA3C131E648E1D000AD17D /* DeletePhotoViewController.xib */,
-			);
-			name = DeletePhotoViewController;
-			sourceTree = "<group>";
-		};
 		2199E6AD747D398375CCCC25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00173C721E7335DB005ADFC5 /* AVFoundation.framework */,
 				CA39DFAE1A553783B80860B6 /* libPods-CameraAndCloud.a */,
 			);
 			name = Frameworks;
@@ -348,13 +304,9 @@
 				007DCC921E3870AC0081CD0A /* Main.storyboard in Resources */,
 				005B2C3A1E36A913006BAFB0 /* button-camera.png in Resources */,
 				00EBE3AE1E42AF7E00203079 /* button-heart-ON.jpg in Resources */,
-				005B2C421E36C50C006BAFB0 /* photo1.jpg in Resources */,
 				002255671E2078410012D790 /* galleryIcon-thumbn-off.png in Resources */,
 				00EBE3B11E42B19700203079 /* button-chat.png in Resources */,
 				002255701E207D520012D790 /* takeAphotColordBkg375X300.png in Resources */,
-				00FA3C151E648E1D000AD17D /* DeletePhotoViewController.xib in Resources */,
-				005B2C441E36C50C006BAFB0 /* photo3.jpg in Resources */,
-				005B2C431E36C50C006BAFB0 /* photo2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,9 +368,6 @@
 				0006DBC31E3FB54900B1A0F3 /* DAO.m in Sources */,
 				00FD319C1E26E55700F5523F /* Photo.m in Sources */,
 				00942AD61E2803F800D3FA4E /* PhotoCollectionViewCell.m in Sources */,
-				007F25561E1EC7D4002C9361 /* TakeAPhotoViewController.m in Sources */,
-				001D20231E6B8DD300ABA460 /* CommentTableViewTableViewController.m in Sources */,
-				00FA3C141E648E1D000AD17D /* DeletePhotoViewController.m in Sources */,
 				007F25531E1EC7D3002C9361 /* AppDelegate.m in Sources */,
 				002105C01E56A6770018A3DC /* ImageInfo.m in Sources */,
 				001D20201E6A1A7300ABA460 /* Comment.m in Sources */,
@@ -427,7 +376,6 @@
 				007F25501E1EC7D3002C9361 /* main.m in Sources */,
 				005B2C3E1E36AB8F006BAFB0 /* TakePhotoViewController.m in Sources */,
 				00ABC7C81E3AE02C001822FE /* PhotoDetailViewController.m in Sources */,
-				002255751E2423E20012D790 /* GalleryCVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

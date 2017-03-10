@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
 #import "Photo.h"
@@ -49,6 +50,7 @@
 - (void) downloadPhotoWithFilename: (ImageInfo *) info;
 - (void) downloadDataForSelectedPhotoFromFirebaseUsersTable:(ImageInfo *)info;
 
+- (UIImage *)resizeImage:(UIImage *)image;
 - (ImageInfo*) uploadImageToFirebase:(UIImage *)selectedImage withImageInfo: (ImageInfo*)info;
 - (void) writeToFireBaseLookupUsersTable: (ImageInfo *) info;
 - (void) writeUserDataToFirebaseUsersTable: (ImageInfo *) info;

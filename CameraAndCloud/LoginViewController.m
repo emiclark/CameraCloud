@@ -66,7 +66,7 @@
 {
     // save user,email,password to nsuserdefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.userName.text forKey:@"user"];
+    [defaults setObject:self.userName.text forKey:@"username"];
     [defaults setObject:self.userEmail.text forKey:@"email"];
     [defaults setObject:self.userPassword.text forKey:@"password"];
     
@@ -110,7 +110,7 @@
 {
     // save user,email,password to nsuserdefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.userName.text forKey:@"user"];
+    [defaults setObject:self.userName.text forKey:@"username"];
     [defaults setObject:self.userEmail.text forKey:@"email"];
     [defaults setObject:self.userPassword.text forKey:@"password"];
     [defaults synchronize];
@@ -129,12 +129,9 @@
                 
                  NSString *uuidString = user.uid;
                  NSLog(@"uuidString:%@ - %@", user.uid, uuidString);
+                 
                  // store user, uuid, email, & password in nsuserdefaults
                  [defaults setValue:uuidString forKey:@"uid"];
-
-//                 [[NSUserDefaults standardUserDefaults] setValue:self.userName.text forKey:@"user"];
-//                 [[NSUserDefaults standardUserDefaults] setValue:self.userEmail.text forKey:@"email"];
-//                 [[NSUserDefaults standardUserDefaults] setValue:self.userPassword.text forKey:@"password"];
                  [self.logoutButton setHidden:NO];
                  
                  [DAO writeNewUserToFirebaseLookupUsersTable:self.userName.text andUUID:uuidString];

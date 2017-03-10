@@ -11,11 +11,11 @@
 @implementation Comment
 
 
-- (instancetype)initWithUsername: (NSString*) user andText: (NSString*) text
+- (instancetype)initWithUsername: (NSString*) username andText: (NSString*) text
 {
     self = [super init];
     if (self) {
-        _username = user;
+        _username = username;
         _text = text;
     }
     return self;
