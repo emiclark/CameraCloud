@@ -13,7 +13,6 @@
 #import "Photo.h"
 #import "ImageInfo.h"
 #import "Comment.h"
-#import "PhotoDetailViewController.h"
 
 @class GalleryCollectionViewController;
 
@@ -26,43 +25,48 @@
 
 @interface DAO : NSObject
 
+@property (strong, nonatomic) FIRStorageReference *storageRef;
+@property (strong, nonatomic) FIRStorageReference *imageRef;
+@property (strong, nonatomic) FIRDatabaseReference *dbRef;
+
 @property (retain, nonatomic) NSMutableArray <ImageInfo*> *imagesArray;
 @property (retain, nonatomic) NSMutableArray <Comment*> *commentArray;
-@property (retain, nonatomic) NSString *imagesArrayPath;
+@property (strong, nonatomic) NSArray *fileList;
+
+@property (strong, nonatomic) Photo *photoDataForUser;
+@property (nonatomic) BOOL finishedDownloadingImages;
 
 @property (strong, nonatomic) UIImage  *selectedImage;
 @property (strong, nonatomic) NSString *filename;
 @property (strong, nonatomic) NSString *fileDate;
 @property (strong, nonatomic) NSString *DDpath;
 
-@property (strong, nonatomic) Photo *photoDataForUser;
-@property (nonatomic) BOOL finishedDownloadingImages;
-
-
-@property (strong, nonatomic) FIRStorageReference *storageRef;
-@property (strong, nonatomic) FIRStorageReference *imageRef;
-@property (strong, nonatomic) FIRDatabaseReference *dbRef;
 
 + (id)sharedInstance;
+- (void) setupApp;
+- (void) addPhotosInDDToImagesArray;
+- (void) addDownloadedPhotosToImagesArray:(NSDictionary*)responseData;
 
-- (void) doWhenAppLaunches;
-- (void) downloadCloudDataForPhotos: (NSArray *) fileList;
+- (void) downloadCloudDataForAllPhotos;
 - (void) downloadPhotoWithFilename: (ImageInfo *) info;
-- (void) downloadDataForSelectedPhotoFromFirebaseUsersTable:(ImageInfo *)info;
+- (void) downloadDataForSelectedPhoto:(ImageInfo *)info;
 
-- (UIImage *)resizeImage:(UIImage *)image;
-- (ImageInfo*) uploadImageToFirebase:(UIImage *)selectedImage withImageInfo: (ImageInfo*)info;
-- (void) writeToFireBaseLookupUsersTable: (ImageInfo *) info;
-- (void) writeUserDataToFirebaseUsersTable: (ImageInfo *) info;
-+ (void) writeNewUserToFirebaseLookupUsersTable:(NSString*) user andUUID:(NSString*) uuidString;
-+ (void) updateDataForSelectedPhotoToFirebaseUsersTable:(Photo *) info;
+- (ImageInfo*) uploadNewPhoto:(UIImage *)selectedImage withImageInfo: (ImageInfo*)info;
+- (void) updateDataForSelectedPhoto:(Photo *) info;
 
-- (FIRStorageReference *) setFirebaseStorageReferences;
-- (FIRDatabaseReference *) setFirebaseDBReferences;
+- (void) registerNewUser:(NSString*) user andUUID:(NSString*) uuidString;
+- (void) registerFilenameForNewPhoto: (ImageInfo *) info;
+- (void) writeDataForNewPhoto: (ImageInfo *) info;
+
+- (void) deletePhotoAndData:(Photo*)photoInfo;
+
 - (void) getDocumentDirectoryPath;
+- (void) saveImageToDD: (UIImage*) image ToDDirectoryWithFilename:(NSString *)filename;
+- (void) updateImagesArrayForAllDownloadedPhotos:(NSDictionary *) responseData;
+- (void) updateImagesArrayWithDownloadedData:(ImageInfo *)info;
 - (NSString *) createFilename;
-- (void) saveImage: (UIImage*) image ToDDirectoryWithFilename:(NSString *)filename;
+- (UIImage *) resizeImage:(UIImage *)image;
 + (void) printImagesArray: (NSMutableArray *)array;
-- (void) updateImagesArrayWithInfo:(ImageInfo *)info;
+
 
 @end

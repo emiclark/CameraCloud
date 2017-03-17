@@ -21,16 +21,16 @@
 @interface TakePhotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate >
 
 @property (strong, nonatomic) DAO *dao;
-@property (nonatomic) BOOL isLoggedOut;
-@property (strong, nonatomic) ImageInfo *imgInfo;
 @property (retain, nonatomic) GalleryCollectionViewController *galleryVC;
+
+@property (strong, nonatomic) ImageInfo *imgInfo;
+@property (strong, nonatomic) UIImage  *selectedImage;
+@property (nonatomic) BOOL isLoggedOut;
+
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *uploadButton;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
-@property (strong, nonatomic) UIImage  *selectedImage;
-
-- (void) showAlertTitle:(NSDictionary *)alertInfo;
 - (void)receivedNotification:(NSNotification *) notification;
 
 @end

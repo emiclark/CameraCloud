@@ -15,8 +15,8 @@
 
 @interface LoginViewController : UIViewController
 
+@property (strong, nonatomic)   DAO  *dao;
 @property (strong, nonatomic) GalleryCollectionViewController *galleryVC;
-@property (weak, nonatomic)   FIRDatabaseReference *ref;
 @property (weak, nonatomic)   FIRAuth  *handle;
 @property (weak, nonatomic)   NSString *currentUser;
 
@@ -27,6 +27,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *createAccountButton;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
--(void) showAlertTitle: (NSString *)title andMsg:(NSString *) msg;
+
+- (IBAction)createAccount:(UIButton *)sender;
+- (IBAction)loginButtonTapped:(UIButton *)sender;
+- (IBAction)logoutButtonTapped:(UIButton *)sender;
+
+- (void) saveLoginInfoToUserDefaults;
+-(void) showAlertTitle: (NSString *)alertTitle andMsg:(NSString *) msg;
 
 @end

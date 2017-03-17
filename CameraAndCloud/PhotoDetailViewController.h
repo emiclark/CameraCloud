@@ -15,27 +15,29 @@
 @import Firebase;
 @import FirebaseDatabase;
 
-@interface PhotoDetailViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
+@interface PhotoDetailViewController : UIViewController <UITableViewDelegate,UITableViewDataSource, UIAlertViewDelegate>
 
 
+@property (strong, nonatomic)  DAO *dao;
 @property (retain, nonatomic)  Photo *photoInfo;
 @property (strong, nonatomic) ImageInfo *info;
-@property BOOL photoDataChanged;
 @property (strong, nonatomic) IBOutlet UIImageView *img;
 @property (strong, nonatomic) IBOutlet UILabel *likesLabel;
-
-@property (weak, nonatomic) IBOutlet UIButton *deletePhotoButton;
-
+@property (weak,   nonatomic) IBOutlet UIButton *deletePhotoButton;
 @property (strong, nonatomic) IBOutlet UIButton *commentButton;
 @property (strong, nonatomic) IBOutlet UIButton *likesButton;
 @property (strong, nonatomic) IBOutlet UITableView *commentTableView;
-@property (weak, nonatomic) IBOutlet UIView *commentView;
-@property (weak, nonatomic) IBOutlet UITextView *commentTextBox;
+@property (weak,   nonatomic) IBOutlet UIView *commentView;
+@property (weak,   nonatomic) IBOutlet UITextView *commentTextBox;
+@property (weak,   nonatomic) IBOutlet UIButton *commentSaveButton;
+@property BOOL photoDataChanged;
+@property BOOL isDelete;
 
-@property (weak, nonatomic) IBOutlet UIButton *commentDoneButton;
 
-
+- (IBAction)likeButtonTapped:(UIButton *)sender;
+- (IBAction)commentButtonTapped:(UIButton *)sender;
+- (IBAction)commentSaveButtonTapped:(UIButton *)sender;
 - (IBAction)deletePhotoButtonTapped:(UIButton *)sender;
-- (void) showDeletePhotoAlert:(NSDictionary *) alertInfo;
+- (void)deletePhoto;
 
 @end

@@ -12,25 +12,26 @@
 
 @end
 
-@implementation PhotoDetailViewController
+@implementation PhotoDetailViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dao = [DAO sharedInstance];
     self.img.image = [UIImage imageNamed:  self.photoInfo.DDfilePath];
     self.likesLabel.text = [NSString stringWithFormat:@"%@ likes", self.photoInfo.likes];
     self.photoDataChanged = NO;
     [self.commentView setHidden:YES];
+    self.isDelete = NO;
 }
 
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound)
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound && !self.isDelete)
     {
         // Firebase update here
-        [DAO updateDataForSelectedPhotoToFirebaseUsersTable: self.photoInfo];
+        [self.dao updateDataForSelectedPhoto: self.photoInfo];
     
-        // Navigation button was pressed. Do some stuff
         [self.navigationController popViewControllerAnimated:NO];
     }
     [super viewWillDisappear:animated];
@@ -41,6 +42,7 @@
 }
 
 
+#pragma mark - buttons tapped methods
 
 - (IBAction)likeButtonTapped:(UIButton *)sender {
     NSLog(@"like button tapped");
@@ -51,45 +53,8 @@
     self.photoInfo.likes = [NSNumber numberWithInt: likes+1];
 }
 
-- (IBAction)deletePhotoButtonTapped:(UIButton *)sender
-{
-    NSLog(@"delete photo button tapped");
-    self.photoDataChanged = YES;
-    //create alertbox
-    NSDictionary *alert = [[NSDictionary alloc] initWithObjectsAndKeys: @"Delete Photo", @"alertTitle", @"Are you sure you want to delete photo?", @"msg",  nil];
-    [self showDeletePhotoAlert :alert];
-    
-}
 
-- (void) showDeletePhotoAlert:(NSDictionary *) alertInfo
-{
-    // pop up alert
-    // Initialize the controller for displaying the message
-    UIAlertController  *alert = [UIAlertController alertControllerWithTitle: [alertInfo objectForKey:@"alertTitle"] message: [alertInfo objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
-    
-    // Create buttons
-    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete" style: UIAlertActionStyleDefault handler:nil];
-    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleDefault handler:nil];
-    
-    // Add the button to the controller
-    [alert addAction: deleteButton];
-    [alert addAction: cancelButton];
-    
-    // Display the alert controller
-    [self presentViewController: alert animated:YES completion:nil];
-}
-
-
-
-
-- (IBAction)commentButtonTapped:(UIButton *)sender {
-    NSLog(@"comment button tapped");
-    [self.commentTableView setHidden:YES];
-    [self.commentView setHidden:NO];
-    self.photoDataChanged = YES;
-}
-
-- (IBAction)commentDoneButtonTapped:(UIButton *)sender {
+- (IBAction)commentSaveButtonTapped:(UIButton *)sender {
     NSLog(@"comment Done button tapped");
     Comment *newComment = [[Comment alloc] initWithUsername:[[NSUserDefaults standardUserDefaults] valueForKey:@"username"] andText:self.commentTextBox.text];
     
@@ -102,6 +67,67 @@
 }
 
 
+- (IBAction)deletePhotoButtonTapped:(UIButton *)sender
+{
+    NSLog(@"delete photo button tapped");
+    self.isDelete = YES;
+    self.photoDataChanged = YES;
+    
+    [self deletePhoto];
+}
+
+- (void) deletePhoto
+{
+    // Initialize the alert box controller for displaying "delete photo" message
+    UIAlertController  *alert = [UIAlertController alertControllerWithTitle: @"Delete Photo" message: @"Are you sure you want to delete this photo?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Create buttons
+    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete" style: UIAlertActionStyleDefault handler: ^(UIAlertAction *action) {
+
+        // delete photo from Documents Directory
+        NSError *error;
+        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:self.photoInfo.DDfilePath error:&error];
+        if (success) {
+            NSLog(@"success - photo deleted from DD");
+        }
+        else
+        {
+            NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+        }
+        
+        // remove photo from imagesArray
+        [self.dao.imagesArray removeObjectAtIndex: self.photoInfo.indexInImagesArray];
+
+        // remove photo from Firebase
+        [self.dao deletePhotoAndData: self.photoInfo];
+        
+        // send notification to update collection view
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object: nil userInfo: nil];
+
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }];
+    
+    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    // Add the button to the controller
+    [alert addAction: deleteButton];
+    [alert addAction: cancelButton];
+    
+    // Display the alert controller
+    [self presentViewController: alert animated:YES completion:nil];
+    
+}
+
+
+- (IBAction)commentButtonTapped:(UIButton *)sender {
+    NSLog(@"comment button tapped");
+    [self.commentTableView setHidden:NO];
+    [self.commentView setHidden:NO];
+    self.photoDataChanged = YES;
+}
 
 
 #pragma mark - Table view data source
@@ -111,7 +137,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.photoInfo.commentsArr.count;
+    if (self.photoInfo.commentsArr.count == 0) {
+        // if no comments, return 1 row to display "Be the first to comment!"
+        return 1;
+    } else {
+        return self.photoInfo.commentsArr.count;
+    }
+
 }
 
 
@@ -123,16 +155,14 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     
     NSMutableString *str;
-    if (self.photoInfo.commentsArr.count == 0 && [self.photoInfo.commentsArr isEqual: @"" ])
-    {
-        //set placeholder text
-        str = (NSMutableString*)@"  Be the first to comment!";
-    }
-    else if (self.photoInfo.commentsArr.count > 0)
+    if (self.photoInfo.commentsArr.count > 0)
     {
         // there are more than one comments
         str = (NSMutableString*)[NSString stringWithFormat:@"  %@:  %@",[[self.photoInfo.commentsArr objectAtIndex:indexPath.row] username], [[self.photoInfo.commentsArr objectAtIndex:indexPath.row] text] ];
+    } else {
+        str = (NSMutableString*)@"Be the first to comment!";
     }
+    
     cell.textLabel.text = str;
     
     return cell;

@@ -11,8 +11,6 @@
 
 @import FirebaseAuth;
 
-#define BASE_URL @"https://cameraandcloud-935e4.firebaseio.com/"
-
 
 @interface GalleryCollectionViewController ()
 @end
@@ -30,10 +28,9 @@ UIActivityIndicatorView *activityView;
 
     // listen for notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotificationForAlertBox:) name:@"showAlert" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"Update" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationForUpdate:) name:@"Update" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationForSegue:) name:@"Segue" object:nil];
 
-    
     // add back to login page button
     logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"logout" style:UIBarButtonItemStylePlain target:self action: @selector(logoutButtonTapped:)];
     
@@ -50,30 +47,11 @@ UIActivityIndicatorView *activityView;
     [self.view addSubview:activityView];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated
+{
     if (!self.dao.finishedDownloadingImages)
          [activityView startAnimating];
     else [activityView stopAnimating];
-    
-    [DAO printImagesArray: self.dao.imagesArray];
-}
-
-
-- (IBAction)logoutButtonTapped:(UIBarButtonItem *)sender {
-    
-    self.isLoggedOut = YES;
-    
-    // sign out
-    NSError *signOutError;
-    
-    BOOL status = [[FIRAuth auth] signOut:&signOutError];
-    if (!status) {
-        NSLog(@"Error signing out: %@", signOutError);
-        return;
-    }
-    
-    // dismiss tabViewController and go back to login screen to logout
-    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -81,15 +59,11 @@ UIActivityIndicatorView *activityView;
 
 - (void)receivedNotificationForAlertBox:(NSNotification *)notification
 {
+    // show alert box with message
     NSLog(@"Notification Received: %@", [notification name]);
     
     NSDictionary *alertInfo = [notification userInfo];
-    [self showAlertTitle: alertInfo];
-}
 
-- (void) showAlertTitle:(NSDictionary *) alertInfo
-{
-    // pop up alert
     // Initialize the controller for displaying the message
     UIAlertController  *alert = [UIAlertController alertControllerWithTitle: [alertInfo objectForKey:@"alertTitle"] message: [alertInfo objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
     
@@ -99,18 +73,21 @@ UIActivityIndicatorView *activityView;
     // Add the button to the controller
     [alert addAction: okButton];
     [activityView stopAnimating];
-
+    
     // Display the alert controller
     [self presentViewController: alert animated:YES completion:nil];
 }
 
 
-- (void)receiveNotification:(NSNotification *)notification {
+- (void)receiveNotificationForUpdate:(NSNotification *)notification
+{
+    // update collection view
     [activityView stopAnimating];
     [self.collectionView reloadData];
 }
 
-- (void)receiveNotificationForSegue:(NSNotification *)notification {
+- (void)receiveNotificationForSegue:(NSNotification *)notification
+{
     // perform segue to detailsVC
     UIStoryboard *main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     PhotoDetailViewController *detailVC = [main instantiateViewControllerWithIdentifier:@"photoDetail"];
@@ -168,17 +145,35 @@ UIActivityIndicatorView *activityView;
 {
     self.info = [[ImageInfo alloc] init];
     self.info = [self.dao.imagesArray objectAtIndex: indexPath.row];
+    self.info.indexInImagesArray = (int)indexPath.row;
     
-    [self.dao downloadDataForSelectedPhotoFromFirebaseUsersTable: self.info];
+    [self.dao downloadDataForSelectedPhoto: self.info];
 }
 
  // Uncomment this method to specify if the specified item should be selected
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
- return YES;
- }
+// - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+// return YES;
+// }
 
+#pragma mark logout method
 
-
+- (IBAction)logoutButtonTapped:(UIBarButtonItem *)sender {
+    
+    self.isLoggedOut = YES;
+    
+    // sign out
+    NSError *signOutError;
+    
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
+    
+    // dismiss tabViewController and go back to login screen to logout
+    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
  // Uncomment this method to specify if the specified item should be highlighted during tracking

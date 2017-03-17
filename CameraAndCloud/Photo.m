@@ -18,6 +18,7 @@
         self.userEmail = userEmail;
         self.filename = filename;
         self.downloadURL = fileDownloadURL;
+        self.indexInImagesArray = 0;
         if (self.likes>0){
             self.likes = likes;
         }

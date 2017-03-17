@@ -8,8 +8,8 @@
 
 #import "TakePhotoViewController.h"
 
-NSString *email;
-NSString *username;
+//NSString *email;
+//NSString *username;
 
 @interface TakePhotoViewController ()
 @end
@@ -27,8 +27,6 @@ NSString *username;
 
 #pragma mark Button Tapped Methods
 
-
-//
 - (IBAction)takePhotoButtonTapped:(UIButton *)sender
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -68,30 +66,30 @@ NSString *username;
 }
 
 
-// gallery
+#pragma mark picker methods
+
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     self.selectedImage = info[UIImagePickerControllerOriginalImage];
     
     // resize image before uploading to Firebase
-    self.selectedImage = [[DAO sharedInstance] resizeImage:self.selectedImage];
+    self.selectedImage = [self.dao resizeImage:self.selectedImage];
 
     // prepare to upload image to Firebase storage
     
     // create info object and save to imagesArray
     ImageInfo *imgInfo =  [[ImageInfo alloc]init];
     imgInfo.filename = [self.dao createFilename];
+    imgInfo.indexInImagesArray = 0;
     imgInfo.imageDDPath = [NSString stringWithFormat:@"%@/%@.jpg", self.dao.DDpath, imgInfo.filename];
     imgInfo.username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     imgInfo.downloadURL = @"";
     
     // save image to DDirectory
-    [self.dao saveImage:self.selectedImage ToDDirectoryWithFilename: imgInfo.imageDDPath];
-    
-    NSLog(@"imagePickerController: imgInfo: %@",imgInfo);
+    [self.dao saveImageToDD:self.selectedImage ToDDirectoryWithFilename: imgInfo.imageDDPath];
     
     // upload selected image to Firebase
-    imgInfo = [self.dao uploadImageToFirebase: self.selectedImage withImageInfo: imgInfo];
+    imgInfo = [self.dao uploadNewPhoto: self.selectedImage withImageInfo: imgInfo];
     
     // add image info to imagesArray
     [self.dao.imagesArray addObject: imgInfo];
@@ -101,22 +99,7 @@ NSString *username;
     
     //dismiss imagepicker
     [self dismissViewControllerAnimated:picker completion:nil];
-    
-    
 }
-
-#pragma mark Alert and Notification Methods
-
-
--(void)receivedNotification:(NSNotification *) notification
-{
-    NSLog(@"Second View Notification Received: %@", [notification name]);
-    
-    NSDictionary *alertInfo = [notification userInfo];
-    [self showAlertTitle: alertInfo];
-}
-
-#pragma  mark Utility Methods
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -124,20 +107,20 @@ NSString *username;
 }
 
 
-- (void) showAlertTitle:(NSDictionary *) alertInfo
+#pragma mark utility/alert Methods
+
+
+-(void)receivedNotification:(NSNotification *) notification
 {
-    // pop up alert -  error
+    NSLog(@"Second View Notification Received: %@", [notification name]);
+    
+    NSDictionary *alertInfo = [notification userInfo];
 
     // Initialize the controller for displaying the message
     UIAlertController  *alert = [UIAlertController alertControllerWithTitle: [alertInfo objectForKey:@"alertTitle"] message: [alertInfo objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
 
-    // Create an OK button and associate the nextStep block with it
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style: UIAlertActionStyleDefault handler:nil];
-
-    // Add the button to the controller
     [alert addAction: okButton];
-
-    // Display the alert controller
     [self presentViewController: alert animated:YES completion:nil];
 }
 
