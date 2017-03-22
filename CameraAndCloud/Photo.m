@@ -10,7 +10,7 @@
 
 @implementation Photo
 
-- (Photo *) initWithEmail: (NSString *)userEmail andFilename:(NSString *)filename andDownloadURL:(NSURL *)fileDownloadURL    Username:(NSString *)username likes:(NSNumber *)likes andComments:(NSMutableArray*) comments {
+- (Photo *) initWithEmail: (NSString *)userEmail andFilename:(NSString *)filename andDownloadURL:(NSURL *)fileDownloadURL    Username:(NSString *)username likes:(NSNumber *)likes andComments:(NSMutableArray*) comments andLikesArray: (NSString *)usersWhoLiked{
     
     self = [super init];
     
@@ -25,6 +25,7 @@
         else
             self.likes = 0;
         self.commentsArr = [[NSMutableArray alloc] initWithObjects:@"", nil];
+        self.likesArray = [[NSMutableArray alloc] initWithObjects:@"", nil];
         self.username = username;
     }
     return  self;

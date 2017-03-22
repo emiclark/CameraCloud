@@ -10,6 +10,7 @@
 		0006DBC31E3FB54900B1A0F3 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0006DBC21E3FB54900B1A0F3 /* DAO.m */; };
 		00173C731E7335DB005ADFC5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00173C721E7335DB005ADFC5 /* AVFoundation.framework */; };
 		001D20201E6A1A7300ABA460 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D201F1E6A1A7300ABA460 /* Comment.m */; };
+		001F09901E7C8CE000069C49 /* button-comment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 001F098F1E7C8CE000069C49 /* button-comment.jpg */; };
 		002105C01E56A6770018A3DC /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 002105BF1E56A6770018A3DC /* ImageInfo.m */; };
 		002255641E20779C0012D790 /* cameraIcon-thumbn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */; };
 		002255671E2078410012D790 /* galleryIcon-thumbn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 002255651E2078410012D790 /* galleryIcon-thumbn-off.png */; };
@@ -20,7 +21,6 @@
 		005B2C3B1E36A913006BAFB0 /* button-home.png in Resources */ = {isa = PBXBuildFile; fileRef = 005B2C391E36A913006BAFB0 /* button-home.png */; };
 		005B2C3E1E36AB8F006BAFB0 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */; };
 		0074FF391E34EFCA002D81CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0074FF381E34EFCA002D81CE /* LoginViewController.m */; };
-		007DCC881E386E800081CD0A /* button-logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 007DCC871E386E800081CD0A /* button-logout.png */; };
 		007DCC921E3870AC0081CD0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007DCC911E3870AC0081CD0A /* Main.storyboard */; };
 		007F25501E1EC7D3002C9361 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F254F1E1EC7D3002C9361 /* main.m */; };
 		007F25531E1EC7D3002C9361 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F25521E1EC7D3002C9361 /* AppDelegate.m */; };
@@ -28,10 +28,9 @@
 		007F255E1E1EC7D4002C9361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */; };
 		007F25681E1EC976002C9361 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007F25671E1EC976002C9361 /* GoogleService-Info.plist */; };
 		00942AD61E2803F800D3FA4E /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00942AD51E2803F800D3FA4E /* PhotoCollectionViewCell.m */; };
-		00ABC7C81E3AE02C001822FE /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */; };
-		00EBE3AD1E42AF7E00203079 /* button-heart-OFF.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AA1E42AF7E00203079 /* button-heart-OFF.jpg */; };
-		00EBE3AE1E42AF7E00203079 /* button-heart-ON.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */; };
-		00EBE3B11E42B19700203079 /* button-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3AF1E42B19700203079 /* button-chat.png */; };
+		00C169501E82E64E0015255A /* button-heart-OFF.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00C1694E1E82E64E0015255A /* button-heart-OFF.jpg */; };
+		00C169511E82E64E0015255A /* button-heart-ON.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00C1694F1E82E64E0015255A /* button-heart-ON.jpg */; };
+		00EA8BC81E82E79E007C0F98 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EA8BC71E82E79E007C0F98 /* PhotoDetailViewController.m */; };
 		00EBE3B21E42B19700203079 /* button-moreBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 00EBE3B01E42B19700203079 /* button-moreBW.png */; };
 		00FD319C1E26E55700F5523F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FD319B1E26E55700F5523F /* Photo.m */; };
 		3C6EEF636D6A1FD60278EAF2 /* libPods-CameraAndCloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA39DFAE1A553783B80860B6 /* libPods-CameraAndCloud.a */; };
@@ -43,6 +42,7 @@
 		00173C721E7335DB005ADFC5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		001D201E1E6A1A7300ABA460 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		001D201F1E6A1A7300ABA460 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		001F098F1E7C8CE000069C49 /* button-comment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-comment.jpg"; sourceTree = "<group>"; };
 		002105BE1E56A6770018A3DC /* ImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfo.h; sourceTree = "<group>"; };
 		002105BF1E56A6770018A3DC /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
 		002255621E20779C0012D790 /* cameraIcon-thumbn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraIcon-thumbn-off.png"; sourceTree = "<group>"; };
@@ -58,7 +58,6 @@
 		005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
 		0074FF371E34EFCA002D81CE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0074FF381E34EFCA002D81CE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		007DCC871E386E800081CD0A /* button-logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-logout.png"; sourceTree = "<group>"; };
 		007DCC911E3870AC0081CD0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		007F254B1E1EC7D3002C9361 /* CameraAndCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraAndCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		007F254F1E1EC7D3002C9361 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,10 +70,9 @@
 		00942AD41E2803F800D3FA4E /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		00942AD51E2803F800D3FA4E /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		00ABC7C61E3AE02C001822FE /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
-		00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
-		00EBE3AA1E42AF7E00203079 /* button-heart-OFF.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-OFF.jpg"; sourceTree = "<group>"; };
-		00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-ON.jpg"; sourceTree = "<group>"; };
-		00EBE3AF1E42B19700203079 /* button-chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-chat.png"; sourceTree = "<group>"; };
+		00C1694E1E82E64E0015255A /* button-heart-OFF.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-OFF.jpg"; sourceTree = "<group>"; };
+		00C1694F1E82E64E0015255A /* button-heart-ON.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "button-heart-ON.jpg"; sourceTree = "<group>"; };
+		00EA8BC71E82E79E007C0F98 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
 		00EBE3B01E42B19700203079 /* button-moreBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-moreBW.png"; sourceTree = "<group>"; };
 		00FD319A1E26E55700F5523F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		00FD319B1E26E55700F5523F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
@@ -108,11 +106,10 @@
 		001D351B1E202F2100CAB4B1 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				00EBE3AF1E42B19700203079 /* button-chat.png */,
+				00C1694E1E82E64E0015255A /* button-heart-OFF.jpg */,
+				00C1694F1E82E64E0015255A /* button-heart-ON.jpg */,
+				001F098F1E7C8CE000069C49 /* button-comment.jpg */,
 				00EBE3B01E42B19700203079 /* button-moreBW.png */,
-				00EBE3AA1E42AF7E00203079 /* button-heart-OFF.jpg */,
-				00EBE3AB1E42AF7E00203079 /* button-heart-ON.jpg */,
-				007DCC871E386E800081CD0A /* button-logout.png */,
 				005B2C381E36A913006BAFB0 /* button-camera.png */,
 				005B2C391E36A913006BAFB0 /* button-home.png */,
 				002255651E2078410012D790 /* galleryIcon-thumbn-off.png */,
@@ -133,7 +130,7 @@
 				005B2C3C1E36AB8F006BAFB0 /* TakePhotoViewController.h */,
 				005B2C3D1E36AB8F006BAFB0 /* TakePhotoViewController.m */,
 				00ABC7C61E3AE02C001822FE /* PhotoDetailViewController.h */,
-				00ABC7C71E3AE02C001822FE /* PhotoDetailViewController.m */,
+				00EA8BC71E82E79E007C0F98 /* PhotoDetailViewController.m */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -164,8 +161,8 @@
 				007F25521E1EC7D3002C9361 /* AppDelegate.m */,
 				00942AD81E28041C00D3FA4E /* PhotoCollectionViewCell */,
 				00942AD71E28040F00D3FA4E /* DataModel */,
-				007DCC911E3870AC0081CD0A /* Main.storyboard */,
 				0006DBC41E3FB55800B1A0F3 /* DAO */,
+				007DCC911E3870AC0081CD0A /* Main.storyboard */,
 				0074FF3A1E34EFF3002D81CE /* VC */,
 				007F255A1E1EC7D4002C9361 /* Assets.xcassets */,
 				007F255C1E1EC7D4002C9361 /* LaunchScreen.storyboard */,
@@ -295,17 +292,16 @@
 				007F255E1E1EC7D4002C9361 /* LaunchScreen.storyboard in Resources */,
 				007F25681E1EC976002C9361 /* GoogleService-Info.plist in Resources */,
 				007F255B1E1EC7D4002C9361 /* Assets.xcassets in Resources */,
-				007DCC881E386E800081CD0A /* button-logout.png in Resources */,
+				001F09901E7C8CE000069C49 /* button-comment.jpg in Resources */,
 				002255641E20779C0012D790 /* cameraIcon-thumbn-off.png in Resources */,
 				005B2C3B1E36A913006BAFB0 /* button-home.png in Resources */,
 				00EBE3B21E42B19700203079 /* button-moreBW.png in Resources */,
 				002255721E207DD90012D790 /* uploadPhotoFromGalleryColordBkg375X300.png in Resources */,
-				00EBE3AD1E42AF7E00203079 /* button-heart-OFF.jpg in Resources */,
 				007DCC921E3870AC0081CD0A /* Main.storyboard in Resources */,
 				005B2C3A1E36A913006BAFB0 /* button-camera.png in Resources */,
-				00EBE3AE1E42AF7E00203079 /* button-heart-ON.jpg in Resources */,
+				00C169501E82E64E0015255A /* button-heart-OFF.jpg in Resources */,
+				00C169511E82E64E0015255A /* button-heart-ON.jpg in Resources */,
 				002255671E2078410012D790 /* galleryIcon-thumbn-off.png in Resources */,
-				00EBE3B11E42B19700203079 /* button-chat.png in Resources */,
 				002255701E207D520012D790 /* takeAphotColordBkg375X300.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0006DBC31E3FB54900B1A0F3 /* DAO.m in Sources */,
+				00EA8BC81E82E79E007C0F98 /* PhotoDetailViewController.m in Sources */,
 				00FD319C1E26E55700F5523F /* Photo.m in Sources */,
 				00942AD61E2803F800D3FA4E /* PhotoCollectionViewCell.m in Sources */,
 				007F25531E1EC7D3002C9361 /* AppDelegate.m in Sources */,
@@ -375,7 +372,6 @@
 				005B2C371E36A66F006BAFB0 /* GalleryCollectionViewController.m in Sources */,
 				007F25501E1EC7D3002C9361 /* main.m in Sources */,
 				005B2C3E1E36AB8F006BAFB0 /* TakePhotoViewController.m in Sources */,
-				00ABC7C81E3AE02C001822FE /* PhotoDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

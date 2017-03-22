@@ -39,7 +39,7 @@ int picCount;
     
     self = [super init];
     if (self)
-    {
+        {
         // set references to firebase storage and database
         // create Firebase storage reference
         FIRStorage *storage = [FIRStorage storage];
@@ -49,36 +49,38 @@ int picCount;
         
         // create Firebase database reference
         self.dbRef = [[FIRDatabase database] referenceFromURL: BASE_DATABASE_URL];
-    }
+        }
     return self;
 }
 
 -(void) setupApp
 {
-        // initialize arrays and variables
-        self.imagesArray = [[NSMutableArray alloc]init ];
-        self.commentArray = [[NSMutableArray alloc]init];
-        self.finishedDownloadingImages = YES;
-        
-        // get Document DirectoryPath
-        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        self.DDpath = [path objectAtIndex:0];
-        NSLog(@"Documents Directory path:%@",self.DDpath);
+    // initialize arrays and variables
+    self.imagesArray = [[NSMutableArray alloc]init ];
+    self.commentArray = [[NSMutableArray alloc]init];
+    self.likesArray = [[NSMutableArray alloc]init];
+    self.finishedDownloadingImages = YES;
+    picCount = 0;
     
-        // check if any photos saved to Documents Direcortory
-        NSFileManager  *filemgr = [NSFileManager defaultManager];
-        self.fileList = [filemgr contentsOfDirectoryAtPath: self.DDpath  error:nil];
-        
-        if (self.fileList.count > 0)
-        {
-            // Photos exist in Documents Directory.
-            // Iterate through fileList and initialize self.imagesArray with photos
-            // to later populate collection view
+    // get Document DirectoryPath
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    self.DDpath = [path objectAtIndex:0];
+    NSLog(@"Documents Directory path:%@",self.DDpath);
+    
+    // check if any photos saved to Documents Direcortory
+    NSFileManager  *filemgr = [NSFileManager defaultManager];
+    self.fileList = [filemgr contentsOfDirectoryAtPath: self.DDpath  error:nil];
+    
+    if (self.fileList.count > 0)
+        {  /*
+            Photos exist in Documents Directory.
+            Iterate through fileList and initialize self.imagesArray with photos
+            to later populate collection view */
             
             [self addPhotosInDDToImagesArray];
         }
     
-        [self downloadCloudDataForAllPhotos];
+    [self downloadCloudDataForAllPhotos];
 }
 
 
@@ -100,24 +102,17 @@ int picCount;
 
 - (void) addDownloadedPhotosToImagesArray:(NSDictionary*)responseData
 {
-    //iterate through responseData for photo information and store in info object
-    for (NSString *key in responseData){
-        
+    //iterate through responseData. create info object, set values, add to imagesArray.
+    for (NSString *key in responseData)
+        {
         // create ImageInfo object and set values
-        ImageInfo *imgInfo = [[ImageInfo alloc]init];
-        imgInfo.filename = key;
-        imgInfo.indexInImagesArray = 0;
-        imgInfo.downloadURL = [[responseData objectForKey:key] objectForKey:@"fileDownloadURL"];
-        //        info.username = [[responseObject objectForKey: key] objectForKey:@"username"];
-        imgInfo.username = [[responseData objectForKey: key] objectForKey:@"username"];
-        imgInfo.imageDDPath = [NSString stringWithFormat: @"%@/%@.jpg",self.DDpath,imgInfo.filename];
+        ImageInfo *imgInfo = [self createInfoObject:responseData WithFilename:key];
         
-        // add to imagesArray
         [self.imagesArray addObject:imgInfo];
-
+        
         // download photos from firebase and save to DocDir
         [self downloadPhotoWithFilename:imgInfo];
-    }
+        }
 }
 
 
@@ -143,106 +138,88 @@ int picCount;
         
         // picCount = how many photos needs to be downloaded from firebase
         picCount = (int)(responseData.count - self.fileList.count);
-
+        
         if (self.fileList.count == 0 && responseData.count > 0)
-        {
+            {
             // no photos in DocsDirectory but photos exists in Firebase.
             self.finishedDownloadingImages = NO;
             [self addDownloadedPhotosToImagesArray:responseData ];
-        }
+            }
         else if (self.fileList.count > 0 && responseData.count > 0)
-        {
-            // photos exist in both DDirectory and Firebase
-        
-            // compare photos in firebase with photos in DDirecory and update info in imagesArray
+            {
+            // photos exist in both DDirectory and Firebase - compare photos in firebase with photos in DDirecory and update info in imagesArray
             NSMutableString *fileInFireBase;
             if (picCount == 0)
-            {
-                // the count for photos is the same in Firebase and Documents Directory
-                // update imagesArray for downloaded photos
+                {
+                // the count for photos is the same in Firebase and Documents Directory - update imagesArray for downloaded photos
                 [self updateImagesArrayForAllDownloadedPhotos: responseData];
-            
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // send notification on main queue to to update
                     self.finishedDownloadingImages = YES;
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object:self userInfo:nil];
                 });
-            }
+                }
             else {
                 // the count for photos is the not the same in Firebase and Documents Directory
                 for (NSString *key in responseData)
-                {
+                    {
                     BOOL fileFound = NO;
-
+                    
                     // get base filename
                     fileInFireBase = (NSMutableString *)key;
-
+                    
                     // for each photo in Firebase,iterate through fileList & populate imagesArray.
                     for (int i=0; i <= self.fileList.count; i++){
-
-                        if (fileFound == NO && i == self.fileList.count && picCount>0)
-                        {
-                        // handle case when last item in
-                            ImageInfo *info = [[ImageInfo alloc]init];
-                            self.finishedDownloadingImages = NO;
-
-                            // create ImageInfo object and set values
-                            info.filename = key;
-                            info.indexInImagesArray = 0;
-                            info.downloadURL = [[responseData objectForKey:key] objectForKey:@"downloadURL"];
-                            info.username = [[responseData objectForKey:key] objectForKey:@"username"];
-                            info.imageDDPath = [NSString stringWithFormat: @"%@/%@.jpg",self.DDpath,info.filename];
+                        
+                        if (fileFound == NO && i == self.fileList.count && picCount < 0)
+                            {
+                            // all photos downloaded and added to imagesArray, stop activity indicator from spinning, create info object and populate with user, downloadURL, DDpath info
+                            ImageInfo *info = [self createInfoObject:responseData WithFilename:key];
                             [self.imagesArray addObject: info];
                             [self downloadPhotoWithFilename: info];
-
+                            
                             fileFound = YES;
-                        }
+                            self.finishedDownloadingImages = NO;
+                            }
                         else
-                        {
-                            // check photo in Firebase against fileList
+                            {
+                            // check downloaded photo with fileList and then update imagesArray
                             NSString *fileInDD = [self.fileList[i] stringByDeletingPathExtension];
-                            if ([fileInFireBase isEqualToString: fileInDD]){
-                                // photo exists in both Documents Directory and Firebase
-                                
-                                // populate imagesArray with missing info: user, downloadURL
-                                ImageInfo *info = [[ImageInfo alloc]init];
-                                
-                                info.filename = fileInDD;
-                                info.indexInImagesArray = 0;
-                                info.downloadURL = [[responseData objectForKey:fileInDD] objectForKey:@"downloadURL"];
-                                info.username = [[responseData objectForKey:fileInDD] objectForKey:@"username"];
-                                info.imageDDPath = [NSString stringWithFormat: @"%@/%@.jpg",self.DDpath,info.filename];
-                                
+                            if ([fileInFireBase isEqualToString: fileInDD])
+                                {
+                                // downloaded photo found in both Documents Directory - create info object and populate with user, downloadURL, DDpath info
+                                ImageInfo *info = [self createInfoObject:responseData WithFilename:fileInDD];
                                 [self updateImagesArrayWithDownloadedData:info];
-                                [DAO printImagesArray: self.imagesArray];
                                 
                                 fileFound = YES;
                                 break;
+                                }
                             }
-                        }
                     }
-                }
+                    }
+                [DAO printImagesArray: self.imagesArray];
             }
-        }
+            }
     }
-    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-    {
-        NSLog(@"failure getting responseObject -or- no photos in Firebase, begin by uploading photos");
-    
-        dispatch_async(dispatch_get_main_queue(),^{
-            
-            if (self.fileList.count == 0)
-            {
-                // no photos in firebase storage or DDirectory. send alert message to user to upload photos
-                self.finishedDownloadingImages = YES;
-                NSLog(@"No photos in Firebase or saved on iPhone. Begin by uploading photos");
-            
-                // send notification on main queue to show alert message to begin with uploading photos
-                NSDictionary *alertParams = [[NSDictionary alloc] initWithObjectsAndKeys: @"There are no photos in the Database.", @"alertTitle", @"Begin by uploading your images.", @"msg", nil];
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"showAlert" object:self userInfo:alertParams];
-            }
-        });
-    }];
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+     NSLog(@"failure getting responseObject -or- no photos in Firebase, begin by uploading photos");
+     
+     dispatch_async(dispatch_get_main_queue(),^{
+         
+         if (self.fileList.count == 0)
+             {
+             // no photos in firebase storage or DDirectory. send alert message to user to upload photos
+             self.finishedDownloadingImages = YES;
+             NSLog(@"No photos in Firebase or saved on iPhone. Begin by uploading photos");
+             
+             // send notification on main queue to show alert message to begin with uploading photos
+             NSDictionary *alertParams = [[NSDictionary alloc] initWithObjectsAndKeys: @"There are no photos in the Database.", @"alertTitle", @"Begin by uploading your images.", @"msg", nil];
+             [[NSNotificationCenter defaultCenter]postNotificationName:@"showAlert" object:self userInfo:alertParams];
+             }
+     });
+     }];
 }
 
 
@@ -258,30 +235,29 @@ int picCount;
     // Download in memory with 10MB max size (10 * 1024 * 1024 bytes)
     [self.imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
         if (error != nil)
-        {
+            {
             // Uh-oh, an error occurred!
             NSLog(@" download error - : %@", [error localizedDescription]);
             self.finishedDownloadingImages = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object:self userInfo:nil];
-        }
+            }
         else
-        {
+            {
             // successful download - write photo to documents directory
             [data writeToFile:photoPath atomically:YES];
             
-            /* decrement picCount. When (picCount=0), all photos are downloaded.
-               Set flag that all downloads complete & send notification to update collection view
-            */
+            // decrement picCount. When (picCount=0), all photos are downloaded. Set flag that all downloads complete & send notification to update collection view
+            
             picCount--;
             if (picCount <= 0)
-            {
+                {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // send notification to update collection view
                     self.finishedDownloadingImages = YES;
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object:self userInfo:nil];
                 });
+                }
             }
-        }
     }];
 }
 
@@ -293,15 +269,16 @@ int picCount;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-
+    
     NSString *userData = [NSString stringWithFormat:@"%@/users/%@/%@.json", BASE_DATABASE_URL, info.username, info.filename];
-
+    
     [manager GET:userData parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         // get user information for specific photo
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.commentArray removeAllObjects];
+            [self.likesArray removeAllObjects];
             
             // populate PhotoDetailViewController with user's photo info from dictionary
             self.photoDataForUser.DDfilePath = [NSString stringWithFormat:@"%@/%@.jpg",self.DDpath,[responseObject objectForKey:@"filename"]];
@@ -314,24 +291,38 @@ int picCount;
             
             // populate comments array
             self.photoDataForUser.commentsArr = [[NSMutableArray alloc]init];
-
             NSArray *tempCommentsArr = [responseObject objectForKey:@"comments"];
             
-            if([tempCommentsArr  isEqual: @""])
-            {
+            if([tempCommentsArr  isEqual: @""]) {
                 // no comments for photo
                 NSLog(@"Nothing in Comments array");
             }
             else
-            {
-                for (NSDictionary *photo in tempCommentsArr)
                 {
-                    // comments exists, add them to array
-                    Comment *comment = [[Comment alloc] initWithUsername:[photo objectForKey:@"username"] andText:[photo  objectForKey:@"text"]];
+                // comments exists, add them to array
+                for (NSDictionary *photo in tempCommentsArr)
+                    {
+                    Comment *comment = [[Comment alloc] initWithUsername:[photo objectForKey:@"username"] andText:[photo objectForKey:@"text"]];
                     [self.commentArray addObject:comment];
+                    }
                 }
-            }
             self.photoDataForUser.commentsArr = self.commentArray;
+            
+            // check if any likes in likesArray
+            NSArray *tempLikesArr = [responseObject objectForKey:@"likesArray"];
+            
+            if([tempLikesArr  isEqual: @""]) {
+                // no comments for photo
+                NSLog(@"Nothing in likes array");
+                self.photoDataForUser.likesArray = [[NSMutableArray alloc]init];
+            }
+            else
+                {
+                // there are likes for photo
+                self.photoDataForUser.likesArray = [[NSMutableArray alloc]initWithArray:[responseObject objectForKey:@"likesArray"]];
+                }
+            
+            // send notification to push to photo detail view controller
             dispatch_async(dispatch_get_main_queue(), ^{
                 // send notification to update collection view
                 self.finishedDownloadingImages = YES;
@@ -342,7 +333,7 @@ int picCount;
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"ERROR: downloading User data for photo:%@-",error);
          }];
-
+    
 }
 
 #pragma mark upload/update to Firebase Methods
@@ -361,36 +352,36 @@ int picCount;
     // Upload the file to the path "images/filename.jpg"
     [self.imageRef putData:data metadata: metaData completion: ^(FIRStorageMetadata *metadata, NSError *error)
      {
-         if (error == nil)
+     if (error == nil)
          {
-             // upload photo success,  show alert box for upload success
-             NSString *alertTitle = @"Upload Successful";
-             NSString *msg = @"Photo uploaded sucessfully!";
-             
-             NSDictionary *alertParams = [[NSDictionary alloc] initWithObjectsAndKeys: alertTitle, @"alertTitle", msg, @"msg", nil];
-             
-             NSLog(@"Success: %@",alertParams);
-             
-             // send notification on main queue to show alert message from TakePhotoViewController
-             dispatch_async(dispatch_get_main_queue(),^{
-                 [[NSNotificationCenter defaultCenter]postNotificationName:@"showAlert" object:self userInfo:alertParams];
-             });
-             
-             // metadata contains file metadata such as size, content-type, and download URL.
-             NSURL *url  = [metadata.downloadURLs objectAtIndex:0];
-             info.downloadURL = [url absoluteString];
-             
-             // write info to database
-             [self registerFilenameForNewPhoto: info];
-             [self writeDataForNewPhoto: info];
-         }
-         else
-         {
-             // upload photo failure,  send notification and alertInfo for upload failure
-             NSString *alertTitle = @"Upload Failed.";
-             NSString *msg = @"Problem uploading the photo.";
-             NSDictionary *alertParams = [[NSDictionary alloc] initWithObjectsAndKeys:alertTitle, @"alertTitle", msg, @"msg", nil];
+         // upload photo success,  show alert box for upload success
+         NSString *alertTitle = @"Upload Successful";
+         NSString *msg = @"Photo uploaded sucessfully!";
+         
+         NSDictionary *alertParams = [[NSDictionary alloc] initWithObjectsAndKeys: alertTitle, @"alertTitle", msg, @"msg", nil];
+         
+         NSLog(@"Success: %@",alertParams);
+         
+         // send notification on main queue to show alert message from TakePhotoViewController
+         dispatch_async(dispatch_get_main_queue(),^{
              [[NSNotificationCenter defaultCenter]postNotificationName:@"showAlert" object:self userInfo:alertParams];
+         });
+         
+         // metadata contains file metadata such as size, content-type, and download URL.
+         NSURL *url  = [metadata.downloadURLs objectAtIndex:0];
+         info.downloadURL = [url absoluteString];
+         
+         // write info to database
+         [self registerFilenameForNewPhoto: info];
+         [self writeDataForNewPhoto: info];
+         }
+     else
+         {
+         // upload photo failure,  send notification and alertInfo for upload failure
+         NSString *alertTitle = @"Upload Failed.";
+         NSString *msg = @"Problem uploading the photo.";
+         NSDictionary *alertParams = [[NSDictionary alloc] initWithObjectsAndKeys:alertTitle, @"alertTitle", msg, @"msg", nil];
+         [[NSNotificationCenter defaultCenter]postNotificationName:@"showAlert" object:self userInfo:alertParams];
          }
      }];
     return info;
@@ -402,28 +393,35 @@ int picCount;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
+    // create comments array to send
     NSMutableArray *commentArrayToSend = [[NSMutableArray alloc] init];
     
     for (Comment *arr in info.commentsArr ) {
         NSString *user = arr.username;
         NSString *text = arr.text;
         NSDictionary *commentDict = [[NSDictionary alloc] initWithObjectsAndKeys:user, @"username", text, @"text", nil];
-        
         [commentArrayToSend addObject: commentDict];
     }
     
+    NSDictionary *post;
     
-    NSDictionary *post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", info.userEmail, @"email", info.filename, @"filename", info.likes, @"likes", info.username, @"username", commentArrayToSend, @"comments",  nil ];
+    if (info.likesArray.count == 0){
+        post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", info.userEmail, @"email", info.filename, @"filename", info.likes, @"likes", info.username, @"username", commentArrayToSend, @"comments", @"", @"likesArray", nil ];
+    }
+    else
+        {
+        post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", info.userEmail, @"email", info.filename, @"filename", info.likes, @"likes", info.username, @"username", commentArrayToSend, @"comments", info.likesArray, @"likesArray", nil ];
+        }
     
     NSString *FBpath = [NSString stringWithFormat:@"%@/users/%@/%@.json",BASE_DATABASE_URL, info.username, info.filename ];
     
     [manager PUT:FBpath parameters:post success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"update photo data - success");
     }
-    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-    {
-        NSLog(@"update photo data - failed");
-    }];
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+     NSLog(@"update photo data - failed");
+     }];
 }
 
 
@@ -443,11 +441,11 @@ int picCount;
     // write uid and user info to /lookup/uid/
     [manager PUT: uidPath parameters: uidDict success: ^(NSURLSessionDataTask *task, id responseObject)
      {
-         NSLog(@"success UUID PUT responseObject: %@", responseObject);
+     NSLog(@"success UUID PUT responseObject: %@", responseObject);
      }
-     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         NSLog(@"fail PUT");
+     NSLog(@"fail PUT");
      }];
 }
 
@@ -465,33 +463,33 @@ int picCount;
     
     [manager PATCH: lookupID parameters: sendInfo success: ^(NSURLSessionDataTask *task, id responseObject)
      {
-         // success writing to baseURL/files/filename
-         NSLog(@"success lookupID PUT responseObject: %@", responseObject);
-         
-         // write user uuid info to database
-         NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-         NSString *uuidString = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
-         
-         // get uid from nsuserdefaults
-         NSString *uidPath = [NSString stringWithFormat:@"%@/lookup/users/%@.json", BASE_DATABASE_URL,uuidString];
-         
-         // create dictionary
-         NSDictionary *uidDict = [[NSDictionary alloc] initWithObjectsAndKeys:username, uuidString, nil];
+     // success writing to baseURL/files/filename
+     NSLog(@"success lookupID PUT responseObject: %@", responseObject);
      
-         // write uid and user info to /lookup/uid/
-         [manager PUT: uidPath parameters: uidDict success: ^(NSURLSessionDataTask *task, id responseObject)
-          {
-              NSLog(@"success UUID PUT responseObject: %@", responseObject);
-          }
+     // write user uuid info to database
+     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+     NSString *uuidString = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+     
+     // get uid from nsuserdefaults
+     NSString *uidPath = [NSString stringWithFormat:@"%@/lookup/users/%@.json", BASE_DATABASE_URL,uuidString];
+     
+     // create dictionary
+     NSDictionary *uidDict = [[NSDictionary alloc] initWithObjectsAndKeys:username, uuidString, nil];
+     
+     // write uid and user info to /lookup/uid/
+     [manager PUT: uidPath parameters: uidDict success: ^(NSURLSessionDataTask *task, id responseObject)
+      {
+      NSLog(@"success UUID PUT responseObject: %@", responseObject);
+      }
           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-          {
-              NSLog(@"fail PUT - error %@", error.localizedDescription);
-          }];
+      {
+      NSLog(@"fail PUT - error %@", error.localizedDescription);
+      }];
      }
-     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         // error writing to baseURL/files/filename
-         NSLog(@"fail PATCH - error %@", error.localizedDescription);
+     // error writing to baseURL/files/filename
+     NSLog(@"fail PATCH - error %@", error.localizedDescription);
      }];
 }
 
@@ -506,17 +504,17 @@ int picCount;
     NSString *email = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
     
     // create dictionary
-    NSDictionary *post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", email, @"email", info.filename, @"filename", @0, @"likes", @"", @"comments", username, @"username", nil];
+    NSDictionary *post = [[NSDictionary alloc] initWithObjectsAndKeys: info.downloadURL, @"downloadURL", email, @"email", info.filename, @"filename", @0, @"likes", @"", @"comments", username, @"username", @"",@"likesArray", nil];
     
     // write NSDictionary photo object to Firebase Database using AFNetworking
     NSString *userInfoString = [NSString stringWithFormat: @"%@/users/%@/%@.json",BASE_DATABASE_URL, username, self.fileDate];
     [manager PUT:userInfoString parameters: post  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
-         NSLog(@"\nsuccess userInfoString%@\n",responseObject);
+     NSLog(@"\nsuccess userInfoString%@\n",responseObject);
      }
-     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         NSLog(@"error: %@", error);
+     NSLog(@"error: %@", error);
      }];
 }
 
@@ -530,13 +528,13 @@ int picCount;
     // Delete the file
     [self.imageRef deleteWithCompletion:^(NSError *error){
         if (error == nil)
-        {
+            {
             // File deleted successfully
             NSLog(@"deletePhotoFromFireBase Storage successful!!");
-        } else {
-            // Uh-oh, an error occurred!
-            NSLog(@"deletePhotoFromFireBase Storage failed!!");
-        }
+            } else {
+                // Uh-oh, an error occurred!
+                NSLog(@"deletePhotoFromFireBase Storage failed!!");
+            }
     }];
     
     // Create a reference to firebase database to delete: users/username/filename
@@ -561,6 +559,18 @@ int picCount;
     NSLog(@"DDpath: %@",self.DDpath);
 }
 
+- (ImageInfo*) createInfoObject:(NSDictionary*)responseData WithFilename:(NSString*)name
+{
+    // populate imagesArray with missing info: user, downloadURL
+    ImageInfo *info = [[ImageInfo alloc]init];
+    
+    info.filename = name;
+    info.indexInImagesArray = 0;
+    info.downloadURL = [[responseData objectForKey:name] objectForKey:@"downloadURL"];
+    info.username = [[responseData objectForKey:name] objectForKey:@"username"];
+    info.imageDDPath = [NSString stringWithFormat: @"%@/%@.jpg",self.DDpath,info.filename];
+    return info;
+}
 
 - (void) saveImageToDD: (UIImage*) image ToDDirectoryWithFilename:(NSString *)filePath
 {
@@ -578,15 +588,10 @@ int picCount;
     //parse through responseData and populate info object
     NSLog(@"\nresponseData: %@",responseData);
     for (NSString *key in responseData)
-    {
-        ImageInfo *info = [[ImageInfo alloc] init];
-        info.indexInImagesArray = 0;
-        info.filename = [[responseData objectForKey: key] objectForKey:@"filename"];
-        info.username  = [[responseData objectForKey:key] objectForKey:@"username"];
-        info.downloadURL  = [[responseData objectForKey:key] objectForKey:@"downloadURL"];
-        info.imageDDPath = [NSString stringWithFormat:@"%@/%@.jpg",self.DDpath, info.filename];
+        {
+        ImageInfo *info = [self createInfoObject:responseData WithFilename:key];
         [self updateImagesArrayWithDownloadedData: info];
-    }
+        }
 }
 
 - (void) updateImagesArrayWithDownloadedData:(ImageInfo *)info
@@ -594,10 +599,10 @@ int picCount;
     // iterate thru imagesArray and update info object with downloaded information
     for (int i=0; i<self.imagesArray.count; i++) {
         if ([[[self.imagesArray objectAtIndex: i] filename] isEqualToString: info.filename] )
-        {
+            {
             [self.imagesArray replaceObjectAtIndex:i withObject:info];
             break;
-        }
+            }
     }
     NSLog(@"updated info:%@",info);
 }
@@ -628,6 +633,17 @@ int picCount;
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
+- (BOOL) checkIfUserLikedPhoto: (Photo *) photoInfo
+{
+    // check if current user liked the photo
+    NSString *userinNSDefaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    // convert NSArray into NSSet
+    NSSet *setOfUsersWhoLiked = [[NSSet alloc] initWithArray: [photoInfo valueForKey:@"likesArray"]];
+    BOOL contains = [setOfUsersWhoLiked containsObject: userinNSDefaults];
+    return contains;
 }
 
 + (void) printImagesArray: (NSMutableArray *)array

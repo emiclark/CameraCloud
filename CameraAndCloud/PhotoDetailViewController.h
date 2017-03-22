@@ -31,12 +31,14 @@
 @property (weak,   nonatomic) IBOutlet UITextView *commentTextBox;
 @property (weak,   nonatomic) IBOutlet UIButton *commentSaveButton;
 @property BOOL photoDataChanged;
+@property (weak, nonatomic) IBOutlet UIButton *commentCancelButton;
 @property BOOL isDelete;
-
+@property BOOL userDidLikePhoto;
 
 - (IBAction)likeButtonTapped:(UIButton *)sender;
 - (IBAction)commentButtonTapped:(UIButton *)sender;
 - (IBAction)commentSaveButtonTapped:(UIButton *)sender;
+- (IBAction)commentCancelButtonTapped:(UIButton *)sender;
 - (IBAction)deletePhotoButtonTapped:(UIButton *)sender;
 - (void)deletePhoto;
 

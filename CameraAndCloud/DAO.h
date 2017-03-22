@@ -14,6 +14,7 @@
 #import "ImageInfo.h"
 #import "Comment.h"
 
+
 @class GalleryCollectionViewController;
 
 
@@ -31,6 +32,7 @@
 
 @property (retain, nonatomic) NSMutableArray <ImageInfo*> *imagesArray;
 @property (retain, nonatomic) NSMutableArray <Comment*> *commentArray;
+@property (retain, nonatomic) NSMutableArray  *likesArray;
 @property (strong, nonatomic) NSArray *fileList;
 
 @property (strong, nonatomic) Photo *photoDataForUser;
@@ -61,11 +63,13 @@
 - (void) deletePhotoAndData:(Photo*)photoInfo;
 
 - (void) getDocumentDirectoryPath;
+- (ImageInfo*) createInfoObject:(NSDictionary*)responseData WithFilename:(NSString*)name;
 - (void) saveImageToDD: (UIImage*) image ToDDirectoryWithFilename:(NSString *)filename;
 - (void) updateImagesArrayForAllDownloadedPhotos:(NSDictionary *) responseData;
-- (void) updateImagesArrayWithDownloadedData:(ImageInfo *)info;
+
 - (NSString *) createFilename;
 - (UIImage *) resizeImage:(UIImage *)image;
+- (BOOL) checkIfUserLikedPhoto: (Photo *) photoInfo;
 + (void) printImagesArray: (NSMutableArray *)array;
 
 

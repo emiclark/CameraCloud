@@ -23,7 +23,7 @@
     self.dao = [DAO sharedInstance];
     self.galleryVC = [[GalleryCollectionViewController alloc] init];
     self.galleryVC.isLoggedOut = NO;
-
+    
     self.createAccountButton.titleLabel.textColor = [UIColor myOrangeColor];
     [[self.createAccountButton layer] setBorderWidth: 1.0f];
     [[self.createAccountButton layer] setBorderColor: [UIColor myOrangeColor].CGColor];
@@ -32,29 +32,29 @@
     [[self.logoutButton layer] setBorderWidth: 1.0f];
     [[self.logoutButton layer] setBorderColor: [UIColor myOrangeColor].CGColor];
     [[self.logoutButton layer] setCornerRadius: 4.0f];
-        
+    
     self.handle = [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user)
-    {
-        NSLog(@"auth:%@, user:%@, currentUser:%@",auth,user, _currentUser);
-    }];
+                   {
+                   NSLog(@"auth:%@, user:%@, currentUser:%@",auth,user, _currentUser);
+                   }];
 }
 
 
 -(void) viewWillAppear:(BOOL)animated
 {
     // logout button tapped from GalleryCollectionViewController, reset input fields to NULL
-    if (self.galleryVC.isLoggedOut) {
+    if (self.galleryVC.isLoggedOut)
+        {
         // reset textfields and properties
         self.userEmail.text = @"";
         self.userPassword.text = @"";
         [self.logoutButton setHidden:YES];
-    }
+        }
     else {
         self.userName.text = @"b";
         self.userEmail.text = @"b@b.com";
         self.userPassword.text = @"1234567";
     }
-
 }
 
 #pragma mark login/logout methods
@@ -65,42 +65,42 @@
     [self saveLoginInfoToUserDefaults];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([self.userEmail.text isEqualToString: @""] && [self.userPassword.text isEqualToString: @""])
-    {
+    if ([self.userEmail.text isEqualToString: @""] || [self.userPassword.text isEqualToString: @""] || [self.userName.text isEqualToString:@""])
+        {
         // error no email or password entered
-        [self showAlertTitle:@"Oops!" andMsg: @"Enter valid email and a password of 6 characters minimum"];
-    }
+        [self showAlertTitle:@"Oops!" andMsg: @"Enter valid username, email and a password of 6 characters minimum"];
+        }
     else {
         //create user account
         [[FIRAuth auth]  createUserWithEmail:  self.userEmail.text  password: self.userPassword.text completion:^(FIRUser *user, NSError *error)
          {
-             if (error == nil)
+         if (error == nil)
              {
-                 // user successfully authenticated
-                 [self.logoutButton setHidden:NO];
-                 NSString *uuidString = user.uid;
-                 NSLog(@"uuidString:%@ - %@", user.uid, uuidString);
-                 
-                 // store user, uuid, email, & password in nsuserdefaults
-                 [defaults setValue:uuidString forKey:@"uid"];
-                 [defaults synchronize];
-                 
-                 [self.dao registerNewUser:self.userName.text andUUID:uuidString];
-                 
-                 // initialize app settings
-                 [self.dao setupApp];
+             // user successfully authenticated
+             [self.logoutButton setHidden:NO];
+             NSString *uuidString = user.uid;
+             NSLog(@"uuidString:%@ - %@", user.uid, uuidString);
              
-                 // make logout button visible
-                 [self.logoutButton setHidden:NO];
-
-                 // perform segue to tab bar controller
-                 [self performSegueWithIdentifier:@"showTab" sender:self];
+             // store user, uuid, email, & password in nsuserdefaults
+             [defaults setValue:uuidString forKey:@"uid"];
+             [defaults synchronize];
+             
+             [self.dao registerNewUser:self.userName.text andUUID:uuidString];
+             
+             // initialize app settings
+             [self.dao setupApp];
+             
+             // make logout button visible
+             [self.logoutButton setHidden:NO];
+             
+             // perform segue to tab bar controller
+             [self performSegueWithIdentifier:@"showTab" sender:self];
              }
-             else
+         else
              {
-                 //errors, print error
-                 NSLog(@"%@", error);
-                 [self showAlertTitle:@"Oops!" andMsg:error.localizedDescription];
+             //errors, print error
+             NSLog(@"%@", error);
+             [self showAlertTitle:@"Oops!" andMsg:error.localizedDescription];
              }
          }];
     }
@@ -111,41 +111,38 @@
     // save user,email,password to nsuserdefaults
     [ self saveLoginInfoToUserDefaults];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    if (![self.userEmail.text isEqualToString: @""] && ![self.userPassword.text isEqualToString: @""])
+    
+    if (![self.userEmail.text isEqualToString: @""] && ![self.userPassword.text isEqualToString: @""] && ![self.userName.text isEqualToString:@""])
         {
-        //email and password textfields are entered
+        //username, email and password textfields are entered
         [[FIRAuth auth] signInWithEmail: self.userEmail.text password: self.userPassword.text completion:^(FIRUser *user, NSError *error)
-        {
-            if (error == nil)
-            {
-                // login success
-                NSLog(@"user account in database, login success %@, %@", user.uid, [[FIRAuth auth]currentUser].uid );
-                
-                //  save uid to nsuserdefaults
-                [defaults setObject:[[FIRAuth auth]currentUser].uid forKey:@"uid"];
-                [defaults synchronize];
-            
-                // initialize app settings
-                [self.dao setupApp];
-                
-                // perform segue to tab bar controller
-                [self performSegueWithIdentifier:@"showTab" sender:self];
-            }
-            else
-            {
-                // login error
-                NSLog(@"error: %@",error);
-                NSString *msg = [NSString stringWithFormat:@"%@ Enter valid email and password, and click login or 'create account.'", error.localizedDescription];
-                [self showAlertTitle:@"Oops!" andMsg: msg];
-            }
-        }];
-    }
+         {
+         if (error == nil)
+             {
+             //  login success - save uid to nsuserdefaults
+             [defaults setObject:[[FIRAuth auth]currentUser].uid forKey:@"uid"];
+             [defaults synchronize];
+             
+             // initialize app settings
+             [self.dao setupApp];
+             
+             // perform segue to tab bar controller
+             [self performSegueWithIdentifier:@"showTab" sender:self];
+             }
+         else
+             {
+             // login error
+             NSLog(@"error: %@",error);
+             NSString *msg = [NSString stringWithFormat:@"%@ Enter valid email and password, and click login or 'create account.'", error.localizedDescription];
+             [self showAlertTitle:@"Oops!" andMsg: msg];
+             }
+         }];
+        }
     else
-    {
+        {
         // username and email and password fields left blank
-        [self showAlertTitle:@"Oops!" andMsg: @"Enter valid email and a password of 6 characters minimum"];
-    }
+        [self showAlertTitle:@"Oops!" andMsg: @"Enter a username, a valid email and a password of 6 characters minimum"];
+        }
 }
 
 - (IBAction)logoutButtonTapped:(UIButton *)sender
@@ -166,6 +163,13 @@
 
 
 #pragma mark utility methods
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // dismiss keyboard when view touched
+    //    [[self view] endEditing:TRUE];
+}
 
 - (void) saveLoginInfoToUserDefaults
 {
@@ -193,13 +197,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

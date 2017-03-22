@@ -25,19 +25,19 @@ UIActivityIndicatorView *activityView;
     [super viewDidLoad];
     
     self.dao = [DAO sharedInstance];
-
+    
     // listen for notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotificationForAlertBox:) name:@"showAlert" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationForUpdate:) name:@"Update" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationForSegue:) name:@"Segue" object:nil];
-
+    
     // add back to login page button
     logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"logout" style:UIBarButtonItemStylePlain target:self action: @selector(logoutButtonTapped:)];
     
     self.navigationItem.leftBarButtonItem = logoutButton;
     
     // Uncomment the following line to preserve selection between presentations
-     self.clearsSelectionOnViewWillAppear = YES;
+    self.clearsSelectionOnViewWillAppear = YES;
     
     // add activityIndicator
     activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -50,7 +50,7 @@ UIActivityIndicatorView *activityView;
 - (void) viewWillAppear:(BOOL)animated
 {
     if (!self.dao.finishedDownloadingImages)
-         [activityView startAnimating];
+        [activityView startAnimating];
     else [activityView stopAnimating];
 }
 
@@ -63,7 +63,7 @@ UIActivityIndicatorView *activityView;
     NSLog(@"Notification Received: %@", [notification name]);
     
     NSDictionary *alertInfo = [notification userInfo];
-
+    
     // Initialize the controller for displaying the message
     UIAlertController  *alert = [UIAlertController alertControllerWithTitle: [alertInfo objectForKey:@"alertTitle"] message: [alertInfo objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
     
@@ -92,7 +92,7 @@ UIActivityIndicatorView *activityView;
     UIStoryboard *main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     PhotoDetailViewController *detailVC = [main instantiateViewControllerWithIdentifier:@"photoDetail"];
     detailVC.photoInfo = self.dao.photoDataForUser;
-
+    
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -106,14 +106,14 @@ UIActivityIndicatorView *activityView;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 #pragma mark <UICollectionViewDataSource>
@@ -134,7 +134,7 @@ UIActivityIndicatorView *activityView;
     PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     cell.photo.image = [UIImage imageWithContentsOfFile: [[self.dao.imagesArray objectAtIndex:indexPath.row] imageDDPath]];
-
+    
     return cell;
 }
 
@@ -150,7 +150,7 @@ UIActivityIndicatorView *activityView;
     [self.dao downloadDataForSelectedPhoto: self.info];
 }
 
- // Uncomment this method to specify if the specified item should be selected
+// Uncomment this method to specify if the specified item should be selected
 // - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 // return YES;
 // }
@@ -184,18 +184,18 @@ UIActivityIndicatorView *activityView;
 
 
 /*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+ // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
 	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+ }
+ 
+ - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
 	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+ }
+ 
+ - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
 	
-}
-*/
+ }
+ */
 
 @end

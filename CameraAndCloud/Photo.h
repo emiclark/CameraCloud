@@ -17,11 +17,11 @@
 @property (nonatomic, strong) NSString *filename;
 @property (nonatomic, strong) NSString *DDfilePath;
 @property (nonatomic, strong) NSMutableArray <Comment*> *commentsArr;
+@property (nonatomic, strong) NSMutableArray *likesArray;
 @property (nonatomic, strong) NSString *username;
 @property NSNumber * likes;
 @property int indexInImagesArray;
 
 
-- (Photo *) initWithEmail: (NSString *)userEmail andFilename:(NSString *)filename andDownloadURL:(NSURL *)fileDownloadURL    Username:(NSString *)username likes:(NSNumber *)likes andComments:(NSMutableArray*) comments;
-
+- (Photo *) initWithEmail: (NSString *)userEmail andFilename:(NSString *)filename andDownloadURL:(NSURL *)fileDownloadURL    Username:(NSString *)username likes:(NSNumber *)likes andComments:(NSMutableArray*) comments andLikesArray: (NSString *)usersWhoLiked;
 @end

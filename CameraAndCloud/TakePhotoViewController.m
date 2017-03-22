@@ -8,9 +8,6 @@
 
 #import "TakePhotoViewController.h"
 
-//NSString *email;
-//NSString *username;
-
 @interface TakePhotoViewController ()
 @end
 
@@ -20,9 +17,14 @@
 {
     [super viewDidLoad];
     self.dao = [DAO sharedInstance];
-
+    
     // listen for notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification:) name:@"showAlert" object:nil];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
 }
 
 #pragma mark Button Tapped Methods
@@ -74,7 +76,7 @@
     
     // resize image before uploading to Firebase
     self.selectedImage = [self.dao resizeImage:self.selectedImage];
-
+    
     // prepare to upload image to Firebase storage
     
     // create info object and save to imagesArray
@@ -93,12 +95,15 @@
     
     // add image info to imagesArray
     [self.dao.imagesArray addObject: imgInfo];
-
+    
     // notify update to refresh collection view
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object:self userInfo:nil];
     
     //dismiss imagepicker
-    [self dismissViewControllerAnimated:picker completion:nil];
+    [self dismissViewControllerAnimated:picker completion:^{
+        NSLog(@"picker dismissed");
+    }];
+
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -115,14 +120,24 @@
     NSLog(@"Second View Notification Received: %@", [notification name]);
     
     NSDictionary *alertInfo = [notification userInfo];
+    
+    self.alert = [UIAlertController alertControllerWithTitle: [alertInfo objectForKey:@"alertTitle"] message: [alertInfo objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                            NSLog(@"ddsfs");
+                            //Do some thing here
+                            //[view dismissViewControllerAnimated:YES completion:nil];
+                         
+                         }];
+    [self.alert addAction:ok];
+    [self presentViewController:self.alert animated:YES completion:nil];
 
-    // Initialize the controller for displaying the message
-    UIAlertController  *alert = [UIAlertController alertControllerWithTitle: [alertInfo objectForKey:@"alertTitle"] message: [alertInfo objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
-
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style: UIAlertActionStyleDefault handler:nil];
-    [alert addAction: okButton];
-    [self presentViewController: alert animated:YES completion:nil];
 }
+
 
 
 - (void)didReceiveMemoryWarning
@@ -132,13 +147,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

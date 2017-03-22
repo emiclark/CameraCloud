@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) DAO *dao;
 @property (retain, nonatomic) GalleryCollectionViewController *galleryVC;
+@property(retain,nonatomic) UIAlertController  *alert;
 
 @property (strong, nonatomic) ImageInfo *imgInfo;
 @property (strong, nonatomic) UIImage  *selectedImage;
